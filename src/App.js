@@ -1,7 +1,13 @@
+import Newsletter from "./Components/Newsletter/Newsletter";
+import Footer from "./Components/Footer/Footer";
+import Approutes from "./Routes";
+
 function App() {
   return (
     <div>
-      <h1 className="text-3xl">Hello tailwind</h1>
+      <Approutes />
+      <Newsletter />
+      <Footer />
     </div>
   );
 }
