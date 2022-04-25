@@ -45,7 +45,7 @@ export default function Select({ options }) {
   return (
     <div className="relative" onBlur={handleBlur}>
       <button
-        className="flex items-center border-[1px] border-slate-200 rounded-md py-2 px-3 shadow-sm shadow-slate-300"
+        className="w-full flex justify-between items-center border-2 border-slate-200 rounded-md py-2 px-3 shadow-sm shadow-slate-300"
         onClick={() => setDropdown(!dropdown)}
       >
         <span className="inline-block text-orange-400">
@@ -59,7 +59,7 @@ export default function Select({ options }) {
         </span>
       </button>
       {dropdown && (
-        <div className="absolute left-0 right-0 top-full mt-2 grid grid-cols-1 gap-2 bg-white text-black text-xl z-10 shadow-md shadow-slate-500 rounded p-2">
+        <div className="absolute left-0 right-0 top-full mt-2 grid grid-cols-1 gap-2 bg-white text-black text-lg z-10 shadow-md shadow-slate-500 rounded p-2">
           {options.map((option) => (
             <button
               key={option.value}
