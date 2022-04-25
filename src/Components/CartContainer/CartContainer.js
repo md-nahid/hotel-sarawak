@@ -8,13 +8,13 @@ export default function CartContainer() {
       <div className="flex justify-around xmd:justify-between items-center ">
         <div className="relative hidden sm:block">
           <Icon icon="carbon:favorite" />
-          <span className="absolute top-0 right-0 translate-x-3 -translate-y-4 w-6 h-6 rounded-full flex justify-center items-center bg-orange-400 text-xs">
+          <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
             1
           </span>
         </div>
         <div className="relative">
           <Icon icon="bi:cart-check-fill" />
-          <span className="absolute top-0 right-0 translate-x-3 -translate-y-4 w-6 h-6 rounded-full flex justify-center items-center bg-orange-400 text-xs">
+          <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
             1
           </span>
         </div>

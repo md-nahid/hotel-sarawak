@@ -111,7 +111,7 @@ export default function Home() {
         </div>
         <div className="mt-8 mb-20 text-right">
           <Link
-            to="/"
+            to="allproducts"
             className="inline-block text-orange-400 text-xl font-bold tracking-wider"
           >
             View All
