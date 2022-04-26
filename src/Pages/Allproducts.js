@@ -3,6 +3,8 @@ import Layout from "../Components/Layout/Layout";
 import Productfilter from "../Components/Productfilter/Productfilter";
 import Card from "../Components/Card/Card";
 import cn from "classnames";
+// hooks
+import useWindowsize from "../Hooks/useWindowsize";
 // import images
 import Bigimg from "../Images/bigimg.png";
 import Cimg1 from "../Images/cimg1.png";
@@ -11,11 +13,13 @@ import { Icon } from "@iconify/react";
 import Pagination from "../Components/Pagination/Pagination";
 
 export default function Allproducts() {
+  let width = useWindowsize();
   const [gridView, setGridView] = useState(true);
   const [product, setProduct] = useState([]);
   const [categoryType, setCategoryType] = useState("all");
   const [ratingValue, setRatingValue] = useState(5);
   const [pageNumber, setPageNumber] = useState(0);
+  const [filterOptions, setFilterOptions] = useState(false);
 
   // pagination
   const userPerPage = 8;
@@ -50,6 +54,15 @@ export default function Allproducts() {
       });
   }, [categoryType]);
 
+  // filter option show and hide hook
+  useEffect(() => {
+    if (width < 992) {
+      setFilterOptions(false);
+    } else {
+      setFilterOptions(true);
+    }
+  }, [width]);
+
   return (
     <div>
       <Layout>
@@ -63,7 +76,6 @@ export default function Allproducts() {
         <div className="grid grid-cols-1 xmd:grid-cols-[260px_1fr] gap-10 mb-5 mt-10">
           <div className="hidden justify-between items-end xmd:flex">
             <h3 className="text-black text-2xl font-bold">Filters</h3>
-            <button className="text-orange-400 text-sm font-semibold cursor-pointer xmd:hidden">Options</button>
             <button className="text-orange-400 text-sm font-semibold cursor-pointer" onClick={() => setCategoryType("all")}>
               Reset All
             </button>
@@ -73,13 +85,15 @@ export default function Allproducts() {
             <div className="flex items-center">
               <h3 className="text-black text-2xl font-bold">Food Picks</h3>
               <div className="xmd:hidden ml-10">
-                <button className="text-orange-400 text-sm font-semibold cursor-pointer">Options</button>
+                <button className="text-orange-400 text-sm font-semibold cursor-pointer" onClick={() => setFilterOptions(true)}>
+                  Options
+                </button>
                 <button className="text-orange-400 text-sm font-semibold cursor-pointer ml-5" onClick={() => setCategoryType("all")}>
                   Reset All
                 </button>
               </div>
             </div>
-            <div className="flex items-center">
+            <div className="items-center hidden sm:flex">
               <button
                 onClick={() => setGridView(true)}
                 className={cn("text-xl  hover:text-orange-400", gridView ? "text-orange-400" : "text-slate-300")}
@@ -97,18 +111,31 @@ export default function Allproducts() {
         </div>
         <div className="grid md:grid-cols-1 xmd:grid-cols-[260px_1fr] gap-10 mb-10">
           {/* product filter options  */}
-          <div className="hidden xmd:block">
-            <Productfilter
-              ProductCategory={ProductCategory}
-              categoryType={categoryType}
-              changeCategory={(value) => setCategoryType(value)}
-              ratingBtns={ratingBtns}
-              filterByRating={(v) => setRatingValue(v)}
-              ratingValue={ratingValue}
-              rangeValue={rangeValue}
-              rangeSliderChange={rangeSliderChange}
-              locationFilters={locationFilters}
-            />
+          <div
+            className={cn(
+              "fixed xmd:static bg-white top-0 z-50 xmd:z-0 left-0  h-screen overflow-y-scroll xmd:h-auto xmd:px-0 pb-10 duration-500",
+              filterOptions ? "w-auto px-5" : "w-0 overflow-hidden px-0"
+            )}
+          >
+            <div className="relative overflow-scroll">
+              <div className="xmd:hidden text-xl font-bold capitalize my-10 flex justify-between">
+                <span>Filter list</span>
+                <button onClick={() => setFilterOptions(false)}>
+                  <Icon icon="akar-icons:cross" />
+                </button>
+              </div>
+              <Productfilter
+                ProductCategory={ProductCategory}
+                categoryType={categoryType}
+                changeCategory={(value) => setCategoryType(value)}
+                ratingBtns={ratingBtns}
+                filterByRating={(v) => setRatingValue(v)}
+                ratingValue={ratingValue}
+                rangeValue={rangeValue}
+                rangeSliderChange={rangeSliderChange}
+                locationFilters={locationFilters}
+              />
+            </div>
           </div>
           {/* product view section  */}
           <div className={cn("grid gap-5 pb-8 min-h-screen", gridView && "grid-cols-1 xs:grid-cols-2 md:grid-cols-3")}>

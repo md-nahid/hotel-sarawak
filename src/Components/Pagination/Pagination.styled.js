@@ -4,9 +4,12 @@ const Wrapper = styled.div`
   .paginationContainer {
     .pagination {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
       list-style: none;
+      @media (min-width: 576px) {
+        justify-content: end;
+      }
       li {
         border: none;
         border-radius: 50%;
