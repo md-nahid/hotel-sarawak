@@ -17,3 +17,22 @@ export const RangeBox = styled.div`
     height: 25px;
   }
 `;
+
+export const Scrollbar = styled.div`
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #bbb;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f04135;
+    border-radius: 10px;
+  }
+`;

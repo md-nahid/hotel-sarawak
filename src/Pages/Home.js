@@ -60,14 +60,10 @@ export default function Home() {
         {/* big sell product section  */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8 items-center my-10 md:my-20 ">
           <div>
-            <h4 className="text-4xl font-bold text-black">
-              One (1) 550g Tin of Milky Way Kuih Kapit
-            </h4>
+            <h4 className="text-4xl font-bold text-black">One (1) 550g Tin of Milky Way Kuih Kapit</h4>
             <p className="text-lg font-normal mt-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam,
-              animi quaerat repellat non in perspiciatis excepturi totam odio
-              minima delectus accusamus harum ab. Consequatur cumque voluptate
-              maxime aliquam perspiciatis quae!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, animi quaerat repellat non in perspiciatis excepturi totam odio minima
+              delectus accusamus harum ab. Consequatur cumque voluptate maxime aliquam perspiciatis quae!
             </p>
             <div className="mt-10">
               <Button text="Add to cart" />
@@ -79,17 +75,12 @@ export default function Home() {
         </div>
         {/* product filter button groups  */}
         <div className="flex flex-col md:flex-row mb-6 items-center">
-          <h3 className="text-2xl text-black font-bold capitalize mr-5 ">
-            Fave Food Picks
-          </h3>
+          <h3 className="text-2xl text-black font-bold capitalize mr-5 ">Fave Food Picks</h3>
           <div className="flex items-center mt-6 md:mt-0">
             {buttons.map((button) => (
               <button
                 key={button.value}
-                className={cn(
-                  "text-black text-sm sm:text-lg font-normal capitalize mx-1 sm:mx-4",
-                  button.value === productType && "font-extrabold"
-                )}
+                className={cn("text-black text-sm sm:text-lg font-normal capitalize mx-1 sm:mx-4", button.value === productType && "font-extrabold")}
                 onClick={() => setProductType(button.value)}
               >
                 {button.label}
@@ -98,22 +89,15 @@ export default function Home() {
           </div>
         </div>
         {/* product list  */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-8">
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-8">
           {product.slice(0, 8).map((item) => (
             <div key={item.idMeal}>
-              <Card
-                cardImg={item.strMealThumb}
-                cardTitle={item.strMeal}
-                cardSubtitle={item.strTags}
-              />
+              <Card cardImg={item.strMealThumb} cardTitle={item.strMeal} cardSubtitle={item.strTags} />
             </div>
           ))}
         </div>
         <div className="mt-8 mb-20 text-right">
-          <Link
-            to="allproducts"
-            className="inline-block text-orange-400 text-xl font-bold tracking-wider"
-          >
+          <Link to="allproducts" className="inline-block text-orange-400 text-xl font-bold tracking-wider">
             View All
           </Link>
         </div>
