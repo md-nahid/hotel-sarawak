@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Layout from "../Components/Layout/Layout";
 import Productfilter from "../Components/Productfilter/Productfilter";
 import Card from "../Components/Card/Card";
 import cn from "classnames";
+import Pagination from "../Components/Pagination/Pagination";
+
 // hooks
 import useWindowsize from "../Hooks/useWindowsize";
 // import images
@@ -10,7 +13,6 @@ import Bigimg from "../Images/bigimg.png";
 import Cimg1 from "../Images/cimg1.png";
 import Cimg2 from "../Images/cimg2.png";
 import { Icon } from "@iconify/react";
-import Pagination from "../Components/Pagination/Pagination";
 
 export default function Allproducts() {
   let width = useWindowsize();
@@ -20,6 +22,15 @@ export default function Allproducts() {
   const [ratingValue, setRatingValue] = useState(5);
   const [pageNumber, setPageNumber] = useState(0);
   const [filterOptions, setFilterOptions] = useState(false);
+  let { state } = useLocation();
+  // setting category type with link props
+  useEffect(() => {
+    if (state === null) {
+      setCategoryType("all");
+    } else {
+      setCategoryType(state.test);
+    }
+  }, [state]);
 
   // pagination
   const userPerPage = 8;
@@ -54,12 +65,15 @@ export default function Allproducts() {
       });
   }, [categoryType]);
 
-  // filter option show and hide hook
+  // filter option show and hide with hook
   useEffect(() => {
     if (width < 992) {
       setFilterOptions(false);
     } else {
       setFilterOptions(true);
+    }
+    if (width < 576) {
+      setGridView(true);
     }
   }, [width]);
 
@@ -113,11 +127,11 @@ export default function Allproducts() {
           {/* product filter options  */}
           <div
             className={cn(
-              "fixed xmd:static bg-white top-0 z-50 xmd:z-0 left-0  h-screen overflow-y-scroll xmd:h-auto xmd:px-0 pb-10 duration-500",
-              filterOptions ? "w-auto px-5" : "w-0 overflow-hidden px-0"
+              "fixed xmd:static bg-white top-0 z-50 xmd:z-0 left-0  h-screen xmd:h-auto xmd:px-0 pb-10 duration-500",
+              filterOptions ? "w-auto overflow-y-scroll xmd:overflow-hidden px-5" : "w-0 px-0"
             )}
           >
-            <div className="relative overflow-scroll">
+            <div className="overflow-hidden">
               <div className="xmd:hidden text-xl font-bold capitalize my-10 flex justify-between">
                 <span>Filter list</span>
                 <button onClick={() => setFilterOptions(false)}>

@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
 // import data
 import { CategoryData } from "../Alldata/HomeSlider.data";
+import { Link } from "react-router-dom";
 
 export default function CatagoriesCarousel() {
   return (
@@ -65,20 +66,15 @@ export default function CatagoriesCarousel() {
         >
           {CategoryData.map((data) => (
             <SwiperSlide key={data.id}>
-              <div className={`h-full rounded overflow-hidden ${data.bgColor}`}>
+              <div className={`h-full rounded overflow-hidden relative ${data.bgColor}`}>
                 <div className="w-full h-32 flex justify-center items-center">
-                  <img
-                    src={data.cImg}
-                    alt={data.cName}
-                    className="max-w-full"
-                  />
+                  <img src={data.cImg} alt={data.cName} className="max-w-full" />
                 </div>
                 <div className="text-center pb-4">
-                  <h4 className="text-slate-900 text-xl font-bold tracking-wide">
-                    {data.cName}
-                  </h4>
+                  <h4 className="text-slate-900 text-xl font-bold tracking-wide">{data.cName}</h4>
                   <p className="text-lg font-bold">{data.cQuantity} items</p>
                 </div>
+                <Link to={"/allproducts"} state={{ test: data.cId }} className="absolute left-0 top-0 right-0 bottom-0"></Link>
               </div>
             </SwiperSlide>
           ))}

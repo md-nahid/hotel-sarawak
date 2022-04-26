@@ -46,6 +46,7 @@ export const CategoryData = [
     cName: "Cake & Milk",
     cQuantity: "126",
     bgColor: "bg-orange-300",
+    cId: "cake-milk",
   },
   {
     id: "c2",
@@ -53,6 +54,7 @@ export const CategoryData = [
     cName: "Desert",
     cQuantity: "126",
     bgColor: "bg-red-500",
+    cId: "desert",
   },
   {
     id: "c3",
@@ -60,6 +62,7 @@ export const CategoryData = [
     cName: "Cake & Milk",
     cQuantity: "126",
     bgColor: "bg-amber-400",
+    cId: "coffes-teas",
   },
   {
     id: "c4",
@@ -67,6 +70,7 @@ export const CategoryData = [
     cName: "Desert",
     cQuantity: "126",
     bgColor: "bg-yellow-400",
+    cId: "vegetable",
   },
   {
     id: "c5",
@@ -74,6 +78,7 @@ export const CategoryData = [
     cName: "Cake & Milk",
     cQuantity: "126",
     bgColor: "bg-lime-400",
+    cId: "cake-milk",
   },
   {
     id: "c6",
@@ -81,6 +86,7 @@ export const CategoryData = [
     cName: "Desert",
     cQuantity: "126",
     bgColor: "bg-emerald-400",
+    cId: "desert",
   },
   {
     id: "c7",
@@ -88,6 +94,7 @@ export const CategoryData = [
     cName: "Cake & Milk",
     cQuantity: "126",
     bgColor: "bg-cyan-400",
+    cId: "coffes-teas",
   },
   {
     id: "c8",
@@ -95,5 +102,6 @@ export const CategoryData = [
     cName: "Desert",
     cQuantity: "126",
     bgColor: "bg-red-400",
+    cId: "vegetable",
   },
 ];
