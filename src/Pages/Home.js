@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../Components/Button/Button";
 import Card from "../Components/Card/Card";
 import Carousel from "../Components/Carousel/Carousel";
@@ -7,9 +8,9 @@ import Layout from "../Components/Layout/Layout";
 import cn from "classnames";
 // import images
 import Bigimg from "../Images/bigimg.png";
-import { Link } from "react-router-dom";
 
 export default function Home() {
+  let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [productType, setProductType] = useState("");
   // filter products by category
@@ -92,7 +93,7 @@ export default function Home() {
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-8">
           {product.slice(0, 8).map((item) => (
             <div key={item.idMeal}>
-              <Card cardImg={item.strMealThumb} cardTitle={item.strMeal} cardSubtitle={item.strTags} />
+              <Card cardImg={item.strMealThumb} cardTitle={item.strMeal} cardSubtitle={item.strTags} onClick={() => navigate(item.idMeal)} />
             </div>
           ))}
         </div>

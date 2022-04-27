@@ -31,7 +31,6 @@ export default function Allproducts() {
       setCategoryType(state.test);
     }
   }, [state]);
-
   // pagination
   const userPerPage = 8;
   const pagesVisited = pageNumber * userPerPage;
@@ -66,6 +65,7 @@ export default function Allproducts() {
   }, [categoryType]);
 
   // filter option show and hide with hook
+  // on sm screen list view is ignored
   useEffect(() => {
     if (width < 992) {
       setFilterOptions(false);

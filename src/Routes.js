@@ -19,7 +19,7 @@ export default function Approutes() {
         }
       />
       <Route
-        path="productdetails"
+        path=":productid"
         element={
           <Suspense fallback="Loading">
             <ProductDetails />
