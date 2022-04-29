@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Layout from "../Components/Layout/Layout";
 import Productfilter from "../Components/Productfilter/Productfilter";
 import Card from "../Components/Card/Card";
 import cn from "classnames";
 import Pagination from "../Components/Pagination/Pagination";
-
 // hooks
 import useWindowsize from "../Hooks/useWindowsize";
 // import images
@@ -16,6 +15,7 @@ import { Icon } from "@iconify/react";
 
 export default function Allproducts() {
   let width = useWindowsize();
+  let navigate = useNavigate();
   const [gridView, setGridView] = useState(true);
   const [product, setProduct] = useState([]);
   const [categoryType, setCategoryType] = useState("all");
@@ -83,7 +83,7 @@ export default function Allproducts() {
         <div className="h-40 my-10 overflow-hidden relative">
           <img src={Bigimg} alt="bigimg" className="w-full object-cover" />
           <div className="absolute left-0 top-0 bg-slate-800 bg-opacity-70 w-full h-full flex justify-center items-center">
-            <h2 className="text-yellow-400 text-5xl font-bold capitalize">discover the right food</h2>
+            <h2 className="text-yellow-400 text-2xl sm:text-3xl md:text-5xl font-bold capitalize">discover the right food</h2>
           </div>
         </div>
         {/* filter options title  */}
@@ -160,6 +160,7 @@ export default function Allproducts() {
                   cardTitle={item.strMeal}
                   cardSubtitle={item.strTags}
                   className={cn(gridView || "grid grid-cols-2 gap-2 sm:gap-8 items-center")}
+                  onClick={() => navigate(`/${item.idMeal}`)}
                 />
               </div>
             ))}

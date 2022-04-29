@@ -22,6 +22,7 @@ export default function Home() {
         setProduct(a);
       });
   }, [productType]);
+
   // set all products
   useEffect(() => {
     fetch("products.json")
