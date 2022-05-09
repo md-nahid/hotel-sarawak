@@ -160,7 +160,12 @@ export default function ProductDetails() {
               </div>
               <div className="flex justify-center items-center py-6">
                 <button className="bg-slate-200 text-gray-400 font-bold py-2 px-8 rounded-md hover:text-gray-600 mr-5">Preview</button>
-                <button className="bg-slate-200 text-gray-400 font-bold py-2 px-8 rounded-md hover:text-gray-600">Next</button>
+                <button
+                  className="bg-slate-200 text-gray-400 font-bold py-2 px-8 rounded-md hover:text-gray-600"
+                  onClick={() => navigate("/checkout")}
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>

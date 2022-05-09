@@ -7,6 +7,7 @@ import Footer from "./Components/Footer/Footer";
 import cn from "classnames";
 // swiper css
 import "swiper/css/bundle";
+// reudx
 
 function App() {
   const [state, setState] = useState(false);

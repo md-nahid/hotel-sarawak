@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 const Allproducts = React.lazy(() => import("./Pages/Allproducts"));
 const ProductDetails = React.lazy(() => import("./Pages/ProductDetails"));
+const Checkout = React.lazy(() => import("./Pages/Checkout"));
 
 export default function Approutes() {
   return (
@@ -23,6 +24,14 @@ export default function Approutes() {
         element={
           <Suspense fallback="Loading">
             <ProductDetails />
+          </Suspense>
+        }
+      />
+      <Route
+        path="checkout"
+        element={
+          <Suspense fallback="Loading">
+            <Checkout />
           </Suspense>
         }
       />
