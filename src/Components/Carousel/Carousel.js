@@ -1,13 +1,18 @@
 import React from "react";
+import Button from "../Button/Button";
+// import swiper slider
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper";
 // import slider data
 import { HomeSliderData } from "../Alldata/HomeSlider.data";
 // icons
 import { Icon } from "@iconify/react";
-import Button from "../Button/Button";
+// import redux actions
+import increment from "../../Redux/Actions";
+import { useDispatch } from "react-redux";
 
 export default function Carousel() {
+  const dispatch = useDispatch();
   return (
     <div className="my-6">
       <Swiper
@@ -48,7 +53,7 @@ export default function Carousel() {
                     </span>
                   </p>
                   <div className="mt-8">
-                    <Button text="Add to cart" />
+                    <Button text="Add to cart" onClick={() => dispatch(increment())} />
                   </div>
                 </div>
               </div>

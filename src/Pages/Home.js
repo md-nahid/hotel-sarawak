@@ -8,8 +8,12 @@ import Layout from "../Components/Layout/Layout";
 import cn from "classnames";
 // import images
 import Bigimg from "../Images/bigimg.png";
+// import redux actions
+import increment from "../Redux/Actions";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const [product, setProduct] = useState([]);
   const [productType, setProductType] = useState("");
@@ -30,26 +34,6 @@ export default function Home() {
       .then((res) => setProduct(res.meals));
   }, []);
 
-  // button groups
-  const buttons = [
-    {
-      label: "Cake & milk",
-      value: "cake-milk",
-    },
-    {
-      label: "Coffes & Teas",
-      value: "coffes-teas",
-    },
-    {
-      label: "Vegetables",
-      value: "vegetable",
-    },
-    {
-      label: "Desert",
-      value: "desert",
-    },
-  ];
-
   return (
     <div>
       <div className="max-w-screen-xl w-full px-0 sm:px-4 m-auto">
@@ -68,7 +52,7 @@ export default function Home() {
               delectus accusamus harum ab. Consequatur cumque voluptate maxime aliquam perspiciatis quae!
             </p>
             <div className="mt-10">
-              <Button text="Add to cart" />
+              <Button text="Add to cart" onClick={() => dispatch(increment())} />
             </div>
           </div>
           <div>
@@ -107,3 +91,23 @@ export default function Home() {
     </div>
   );
 }
+
+// button groups
+const buttons = [
+  {
+    label: "Cake & milk",
+    value: "cake-milk",
+  },
+  {
+    label: "Coffes & Teas",
+    value: "coffes-teas",
+  },
+  {
+    label: "Vegetables",
+    value: "vegetable",
+  },
+  {
+    label: "Desert",
+    value: "desert",
+  },
+];

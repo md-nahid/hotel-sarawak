@@ -8,6 +8,8 @@ import cn from "classnames";
 // swiper css
 import "swiper/css/bundle";
 // reudx
+import { Provider } from "react-redux";
+import { store } from "./Redux/Store";
 
 function App() {
   const [state, setState] = useState(false);
@@ -25,12 +27,14 @@ function App() {
   }, [pathname]);
 
   return (
-    <div className={cn(state && "bg-slate-50")}>
-      <Topbar />
-      <Approutes />
-      <Newsletter />
-      <Footer />
-    </div>
+    <Provider store={store}>
+      <div className={cn(state && "bg-slate-50")}>
+        <Topbar />
+        <Approutes />
+        <Newsletter />
+        <Footer />
+      </div>
+    </Provider>
   );
 }
 
