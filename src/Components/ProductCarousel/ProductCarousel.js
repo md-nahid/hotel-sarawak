@@ -36,9 +36,6 @@ export default function ProductCarousel() {
       img1: SlideImg2,
     },
   ];
-  function handleClick(value) {
-    setState(value);
-  }
   return (
     <div>
       <div className="grid grid-cols-[1fr] sm:grid-cols-[80px_1fr] md:grid-cols-[100px_1fr] gap-5 items-center">
@@ -63,7 +60,10 @@ export default function ProductCarousel() {
             >
               {allImg.map((item) => (
                 <SwiperSlide key={item.id}>
-                  <button className="h-full flex items-center w-full rounded-md overflow-hidden" onClick={() => handleClick(item.img1)}>
+                  <button
+                    className="h-full flex items-center w-full rounded-md overflow-hidden"
+                    onClick={() => setState(item.img1)}
+                  >
                     <img src={item.img1} alt="icon" className="w-full h-full" />
                   </button>
                 </SwiperSlide>
@@ -77,7 +77,11 @@ export default function ProductCarousel() {
           </div>
         </div>
         <div className="max-h-[426px] h-full">
-          <img src={state} alt="icon" className="w-full h-full object-cover object-center rounded-md" />
+          <img
+            src={state}
+            alt="icon"
+            className="w-full h-full object-cover object-center rounded-md"
+          />
         </div>
       </div>
     </div>
