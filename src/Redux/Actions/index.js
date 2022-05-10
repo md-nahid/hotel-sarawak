@@ -1,5 +1,6 @@
-export default function increment() {
+export default function increment(productId) {
   return {
     type: "INCREMENT",
+    payload: productId,
   };
 }

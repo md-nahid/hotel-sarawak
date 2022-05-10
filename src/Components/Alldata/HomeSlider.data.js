@@ -2,7 +2,7 @@
 
 export const HomeSliderData = [
   {
-    id: "01",
+    id: "52977",
     title: "One (1) 550g Tin of Milky Way Kuih Kapit",
     subtitle: "milky way food industries (3 damansara)",
     limitedOffer: "limited Lime offer",
@@ -11,7 +11,7 @@ export const HomeSliderData = [
     productImg: "https://i.ibb.co/0ZVpV4v/slide-Productimg.png",
   },
   {
-    id: "02",
+    id: "53060",
     title: "One (1) 550g Tin of Milky Way Kuih Kapit",
     subtitle: "milky way food industries (3 damansara)",
     limitedOffer: "limited Lime offer",
@@ -20,7 +20,7 @@ export const HomeSliderData = [
     productImg: "https://i.ibb.co/0ZVpV4v/slide-Productimg.png",
   },
   {
-    id: "03",
+    id: "52978",
     title: "One (1) 550g Tin of Milky Way Kuih Kapit",
     subtitle: "milky way food industries (3 damansara)",
     limitedOffer: "limited Lime offer",
@@ -29,7 +29,7 @@ export const HomeSliderData = [
     productImg: "https://i.ibb.co/0ZVpV4v/slide-Productimg.png",
   },
   {
-    id: "04",
+    id: "53026",
     title: "One (1) 550g Tin of Milky Way Kuih Kapit",
     subtitle: "milky way food industries (3 damansara)",
     limitedOffer: "limited Lime offer",

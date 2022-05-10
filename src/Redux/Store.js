@@ -3,6 +3,6 @@ import counterReducer from "./Reducers/Counter";
 
 export const store = configureStore({
   reducer: {
-    cart: counterReducer,
+    cartCount: counterReducer,
   },
 });
