@@ -4,9 +4,3 @@ export default function increment(productId) {
     payload: productId,
   };
 }
-export function decrement(productId) {
-  return {
-    type: "DECREMENT",
-    payload: productId,
-  };
-}

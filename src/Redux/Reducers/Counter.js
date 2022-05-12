@@ -1,6 +1,11 @@
 let initialState = {
   count: 0,
-  products: [],
+  products: [
+    {
+      order: 0,
+      id: "",
+    },
+  ],
 };
 
 export default function counterReducer(state = initialState, action) {

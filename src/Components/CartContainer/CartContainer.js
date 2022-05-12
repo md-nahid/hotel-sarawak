@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { decrement } from "../../Redux/Actions";
+import { useSelector } from "react-redux";
 // icons
 import { Icon } from "@iconify/react";
 
@@ -9,7 +8,6 @@ export default function CartContainer() {
   let [cartData, setCartData] = useState([]);
   const { count } = useSelector((state) => state.cartCount);
   const { products } = useSelector((state) => state.cartCount);
-
   // setting cart values
   useEffect(() => {
     // other code
@@ -34,7 +32,6 @@ export default function CartContainer() {
       setShowCart(true);
     }
   }
-
   return (
     <div
       className=" py-2 px-3 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl relative"
@@ -60,7 +57,7 @@ export default function CartContainer() {
         </div>
       </div>
       {showCart && (
-        <div className="absolute w-full bg-DarkOrange p-2 rounded left-0 top-[110%]">
+        <div className="absolute w-full bg-DarkOrange rounded left-0 top-[110%]">
           {products.length ? (
             <AllcartItems allcartItems={cartData} />
           ) : (
@@ -73,35 +70,26 @@ export default function CartContainer() {
 }
 
 function AllcartItems({ allcartItems }) {
-  function handleClick() {}
-  let dispatch = useDispatch();
   return (
     <div>
       {allcartItems.map((item, index) => (
         <div
           key={index}
-          className="grid grid-cols-[1fr_30px] gap-3 mb-2 items-center"
+          className="grid grid-cols-[1fr_30px] gap-3 items-center p-2"
         >
-          <div
-            className="grid grid-cols-[40px_1fr] gap-3 items-center cursor-pointer"
-            onClick={handleClick}
-          >
+          <div className="grid grid-cols-[30px_1fr] gap-3 items-center cursor-pointer">
             <div className="rounded-md overflow-hidden">
-              <img
-                src={item.strMealThumb}
-                alt="product"
-                className="w-full h-full"
-              />
+              <img src={item.strMealThumb} alt="product" className="w-full" />
             </div>
             <div>
               <h5>{item.strMeal}</h5>
             </div>
           </div>
-          <button onClick={() => dispatch(decrement(item.idMeal))}>
-            <Icon icon="charm:cross" />
-          </button>
         </div>
       ))}
+      <button className="text-slate-200 text-sm text-center w-full border-t border-slate-200 p-2">
+        Checkout
+      </button>
     </div>
   );
 }

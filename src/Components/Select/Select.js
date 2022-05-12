@@ -59,13 +59,13 @@ export default function Select({ options }) {
         </span>
       </button>
       {dropdown && (
-        <div className="absolute left-0 right-0 top-full mt-2 grid grid-cols-1 gap-2 bg-white text-black text-lg z-10 shadow-md shadow-slate-500 rounded p-2">
+        <div className="absolute left-0 right-0 top-full mt-2 grid grid-cols-1 bg-white text-black text-lg z-10 shadow-md shadow-slate-500 rounded p-1">
           {options.map((option) => (
             <button
               key={option.value}
               onClick={() => handleClick(option.value)}
               className={cn(
-                "text-center hover:bg-slate-100 rounded py-2",
+                "text-center text-sm hover:bg-slate-100 rounded py-2 mb-0",
                 option.selected && "text-orange-300"
               )}
             >
