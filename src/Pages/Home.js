@@ -1,62 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../Components/Button/Button";
 import Card from "../Components/Card/Card";
 import Carousel from "../Components/Carousel/Carousel";
 import CatagoriesCarousel from "../Components/CatagoriesCarousel/CatagoriesCarousel";
 import Layout from "../Components/Layout/Layout";
-import cn from "classnames";
-// import images
 import Bigimg from "../Images/bigimg.png";
-// import redux actions
 import increment from "../Redux/Actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Tabs from "../Components/Tabs/Tabs";
+import { motion } from "framer-motion";
+// import images
 
 export default function Home() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const [product, setProduct] = useState([]);
-  const [productType, setProductType] = useState("");
-  // filter products by category
-  useEffect(() => {
-    fetch("products.json")
-      .then((req) => req.json())
-      .then((res) => {
-        let a = res.meals.filter((meal) => meal.strCategory === productType);
-        setProduct(a);
-      });
-  }, [productType]);
-
-  // set all products
-  useEffect(() => {
-    fetch("products.json")
-      .then((req) => req.json())
-      .then((res) => setProduct(res.meals));
-  }, []);
+  const { products } = useSelector((state) => state.cartCount);
+  const [productType, setProductType] = useState("cake-milk");
 
   return (
     <div>
-      <div className="max-w-screen-xl w-full px-0 sm:px-4 m-auto">
+      <div className="max-w-screen-xl w-full px-0 sm:px-4 m-auto mt-11">
         <Carousel />
       </div>
       <Layout>
-        <CatagoriesCarousel />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8 items-center my-10 md:my-20 ">
+        <div className="mt-14 md:mt-10">
+          <CatagoriesCarousel />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8 items-center mt-14 md:mt-20">
           <div>
-            <h4 className="text-4xl font-bold text-black">
-              One (1) 550g Tin of Milky Way Kuih Kapit
-            </h4>
+            <h4 className="text-4xl font-bold text-black">One (1) 550g Tin of Milky Way Kuih Kapit</h4>
             <p className="text-lg font-normal mt-5">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam,
-              animi quaerat repellat non in perspiciatis excepturi totam odio
-              minima delectus accusamus harum ab. Consequatur cumque voluptate
-              maxime aliquam perspiciatis quae!
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam, animi quaerat repellat non in perspiciatis excepturi totam odio minima
+              delectus accusamus harum ab. Consequatur cumque voluptate maxime aliquam perspiciatis quae!
             </p>
             <div className="mt-10">
-              <Button
-                text="Add to cart"
-                onClick={() => dispatch(increment("52977"))}
-              />
+              <Button text="Add to cart" onClick={() => dispatch(increment("52977"))} />
             </div>
           </div>
           <div>
@@ -64,67 +43,36 @@ export default function Home() {
           </div>
         </div>
         {/* product filter button groups  */}
-        <div className="flex flex-col md:flex-row mb-6 items-center">
-          <h3 className="text-2xl text-black font-bold capitalize mr-5 ">
-            Fave Food Picks
-          </h3>
-          <div className="flex items-center mt-6 md:mt-0">
-            {buttons.map((button) => (
-              <button
-                key={button.value}
-                className={cn(
-                  "text-black text-sm sm:text-lg font-normal capitalize mx-1 sm:mx-4",
-                  button.value === productType && "font-extrabold"
-                )}
-                onClick={() => setProductType(button.value)}
-              >
-                {button.label}
-              </button>
-            ))}
+        <div className="mt-14 md:mt-20">
+          <div className="flex justify-between items-center">
+            <h3 className="text-2xl text-black font-bold capitalize mr-5 ">Food Picks</h3>
+            <Link to="allproducts" className="inline-block py-2 px-5 bg-orange-600 text-white text-lg rounded-md hover:bg-orange-700">
+              All Products
+            </Link>
+          </div>
+          <div className="mt-5">
+            <Tabs onClick={(v) => setProductType(v)} productType={productType} />
           </div>
         </div>
         {/* product list  */}
-        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 pb-8">
-          {product.slice(0, 8).map((item) => (
-            <div key={item.idMeal}>
-              <Card
-                cardImg={item.strMealThumb}
-                cardTitle={item.strMeal}
-                cardSubtitle={item.strTags}
-                onClick={() => navigate(item.idMeal)}
-              />
-            </div>
-          ))}
-        </div>
-        <div className="mt-8 mb-20 text-right">
-          <Link
-            to="allproducts"
-            className="inline-block text-orange-400 text-xl font-bold tracking-wider"
-          >
-            View All
-          </Link>
+        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 min-h-[600px]">
+          {products
+            .filter((meal) => meal.strCategory === productType)
+            .slice(0, 8)
+            .map((item) => (
+              <motion.div key={item.idMeal} animate={animate}>
+                <Card cardImg={item.strMealThumb} cardTitle={item.strMeal} cardSubtitle={item.strTags} onClick={() => navigate(item.idMeal)} />
+              </motion.div>
+            ))}
         </div>
       </Layout>
     </div>
   );
 }
 
-// button groups
-const buttons = [
-  {
-    label: "Cake & milk",
-    value: "cake-milk",
-  },
-  {
-    label: "Coffes & Teas",
-    value: "coffes-teas",
-  },
-  {
-    label: "Vegetables",
-    value: "vegetable",
-  },
-  {
-    label: "Desert",
-    value: "desert",
-  },
-];
+const animate = {
+  y: [20, 0],
+  scale: [0.7, 1],
+  opacity: [0, 1],
+  transition: { duration: 0.5 },
+};

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData, showSearch } from "../../Redux/Actions";
+import { fetchData } from "../../Redux/Actions";
 // icons
 import { Icon } from "@iconify/react";
 
@@ -11,7 +11,6 @@ export default function CartContainer() {
   let [showCart, setShowCart] = useState(false);
   const { cart } = useSelector((state) => state.cartCount);
   const user = useSelector((state) => state.login);
-
   // fetch data when this component loads
   useEffect(() => {
     dispatch(fetchData());
@@ -30,14 +29,11 @@ export default function CartContainer() {
 
   return (
     <div
-      className=" py-2 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl relative"
+      className="py-2 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl relative"
       onBlur={(event) => (!event.currentTarget.contains(event.relatedTarget) ? setShowCart(false) : setShowCart(true))}
     >
       <div className="flex justify-around items-center">
-        <button className="xmd:hidden" onClick={() => dispatch(showSearch())}>
-          <Icon icon="charm:search" />
-        </button>
-        <button className="relative">
+        <button className="relative hidden md:block">
           <Icon icon="material-symbols:favorite-rounded" />
           <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
             0

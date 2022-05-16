@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // icons
 import { Icon } from "@iconify/react";
 // import swiper slider
@@ -6,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper";
 // import data
 import { CategoryData } from "../Alldata/HomeSlider.data";
-import { Link } from "react-router-dom";
 
 export default function CatagoriesCarousel() {
   return (
@@ -22,10 +22,11 @@ export default function CatagoriesCarousel() {
           </button>
         </div>
       </div>
-      <div className="my-8">
+      <div className="mt-10">
         <Swiper
           slidesPerView={1}
-          spaceBetween={20}
+          spaceBetween={16}
+          speed={800}
           loop={true}
           autoplay={{
             delay: 4000,
@@ -38,27 +39,21 @@ export default function CatagoriesCarousel() {
           breakpoints={{
             320: {
               slidesPerView: 2,
-              spaceBetween: 15,
             },
             500: {
               slidesPerView: 3,
-              spaceBetween: 15,
             },
             640: {
               slidesPerView: 4,
-              spaceBetween: 20,
             },
             850: {
               slidesPerView: 5,
-              spaceBetween: 20,
             },
             992: {
               slidesPerView: 6,
-              spaceBetween: 20,
             },
             1024: {
               slidesPerView: 7,
-              spaceBetween: 20,
             },
           }}
           modules={[Autoplay, Navigation]}
@@ -66,13 +61,13 @@ export default function CatagoriesCarousel() {
         >
           {CategoryData.map((data) => (
             <SwiperSlide key={data.id}>
-              <div className={`h-full rounded overflow-hidden relative ${data.bgColor}`}>
+              <div className={`h-full rounded-2xl overflow-hidden relative ${data.bgColor}`}>
                 <div className="w-full h-32 flex justify-center items-center">
                   <img src={data.cImg} alt={data.cName} className="max-w-full" />
                 </div>
                 <div className="text-center pb-4">
-                  <h4 className="text-slate-900 text-xl font-bold tracking-wide">{data.cName}</h4>
-                  <p className="text-lg font-bold">{data.cQuantity} items</p>
+                  <h4 className="text-slate-900 text-xl font-semibold tracking-wide">{data.cName}</h4>
+                  <p className="text-[16px] font-normal ">{data.cQuantity} items</p>
                 </div>
                 <Link to={"/allproducts"} state={{ test: data.cId }} className="absolute left-0 top-0 right-0 bottom-0"></Link>
               </div>

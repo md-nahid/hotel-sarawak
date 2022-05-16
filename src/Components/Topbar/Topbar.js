@@ -7,12 +7,14 @@ import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { hideSearch } from "../../Redux/Actions";
 import Card from "../Card/Card";
+import { showSearch } from "../../Redux/Actions";
 // import images
 import Logo from "../../Images/logo.svg";
 import Mobilelogo from "../../Images/mobilelogo.svg";
 import { Icon } from "@iconify/react";
 
 export default function Topbar() {
+  const dispatch = useDispatch();
   const width = useWindowsize();
   const s = useSelector((state) => state.isSearch);
   useEffect(() => {
@@ -33,7 +35,13 @@ export default function Topbar() {
         </div>
         <div>{width > 992 && <Search />}</div>
         <div>
-          <div className="max-w-[236px] w-full ml-auto">
+          <div className="max-w-[260px] grid grid-cols-[auto_1fr] xmd:grid-cols-1 gap-3 w-full ml-auto">
+            <button
+              className="xmd:hidden px-2 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl text-center"
+              onClick={() => dispatch(showSearch())}
+            >
+              <Icon icon="charm:search" />
+            </button>
             <CartContainer />
           </div>
         </div>
@@ -53,7 +61,7 @@ function SearchModal() {
         <input
           type="text"
           placeholder="Search by names..."
-          className="w-full h-full pl-5 pr-14 rounded-md outline-none text-xl text-center py-5"
+          className="w-full h-full pl-5 pr-14 rounded-md outline-none text-xl text-center py-1 sm:py-3 md:py-5"
           value={value}
           onChange={(e) => setValue(e.target.value)}
           autoFocus={true}
@@ -68,7 +76,7 @@ function SearchModal() {
           <Icon icon="akar-icons:cross" />
         </button>
       </div>
-      <div className="py-5 px-3 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+      <div className="py-5 px-3 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
         {products
           .filter((item) => item.strMeal.toLowerCase().includes(value))
           .map((prod) => (
