@@ -37,13 +37,10 @@ export default function Home() {
   return (
     <div>
       <div className="max-w-screen-xl w-full px-0 sm:px-4 m-auto">
-        {/* top Carousel  */}
         <Carousel />
       </div>
       <Layout>
-        {/* category carousel  */}
         <CatagoriesCarousel />
-        {/* big sell product section  */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-8 items-center my-10 md:my-20 ">
           <div>
             <h4 className="text-4xl font-bold text-black">

@@ -6,6 +6,7 @@ import Home from "./Pages/Home";
 const Allproducts = React.lazy(() => import("./Pages/Allproducts"));
 const ProductDetails = React.lazy(() => import("./Pages/ProductDetails"));
 const Checkout = React.lazy(() => import("./Pages/Checkout"));
+const MyCart = React.lazy(() => import("./Pages/MyCart"));
 
 export default function Approutes() {
   return (
@@ -32,6 +33,14 @@ export default function Approutes() {
         element={
           <Suspense fallback="Loading">
             <Checkout />
+          </Suspense>
+        }
+      />
+      <Route
+        path="mycart"
+        element={
+          <Suspense fallback="Loading">
+            <MyCart />
           </Suspense>
         }
       />

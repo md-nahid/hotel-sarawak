@@ -16,7 +16,6 @@ import { Icon } from "@iconify/react";
 export default function Allproducts() {
   let width = useWindowsize();
   let navigate = useNavigate();
-  const [gridView, setGridView] = useState(true);
   const [product, setProduct] = useState([]);
   const [categoryType, setCategoryType] = useState("all");
   const [ratingValue, setRatingValue] = useState(5);
@@ -65,15 +64,11 @@ export default function Allproducts() {
   }, [categoryType]);
 
   // filter option show and hide with hook
-  // on sm screen list view is ignored
   useEffect(() => {
     if (width < 992) {
       setFilterOptions(false);
     } else {
       setFilterOptions(true);
-    }
-    if (width < 576) {
-      setGridView(true);
     }
   }, [width]);
 
@@ -87,38 +82,17 @@ export default function Allproducts() {
           </div>
         </div>
         {/* filter options title  */}
-        <div className="grid grid-cols-1 xmd:grid-cols-[260px_1fr] gap-10 mb-5 mt-10">
-          <div className="hidden justify-between items-end xmd:flex">
-            <h3 className="text-black text-2xl font-bold">Filters</h3>
-            <button className="text-orange-400 text-sm font-semibold cursor-pointer" onClick={() => setCategoryType("all")}>
-              Reset All
-            </button>
-          </div>
-          {/* change view buttons  */}
+        <div className="mb-5 mt-10">
           <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <h3 className="text-black text-2xl font-bold">Food Picks</h3>
-              <div className="xmd:hidden ml-10">
-                <button className="text-orange-400 text-sm font-semibold cursor-pointer" onClick={() => setFilterOptions(true)}>
-                  Options
-                </button>
-                <button className="text-orange-400 text-sm font-semibold cursor-pointer ml-5" onClick={() => setCategoryType("all")}>
-                  Reset All
-                </button>
-              </div>
-            </div>
-            <div className="items-center hidden sm:flex">
-              <button
-                onClick={() => setGridView(true)}
-                className={cn("text-xl  hover:text-orange-400", gridView ? "text-orange-400" : "text-slate-300")}
-              >
-                <Icon icon="oi:grid-three-up" />
+            <h3 className="text-slate-600 text-2xl font-bold flex items-center">
+              <button onClick={() => width < 992 && setFilterOptions(true)}>
+                <Icon icon="akar-icons:settings-horizontal" />
               </button>
-              <button
-                onClick={() => setGridView(false)}
-                className={cn("text-xl ml-10 xmd:mr-10 hover:text-orange-400", gridView ? "text-slate-300" : "text-orange-400")}
-              >
-                <Icon icon="fa:bars" />
+              Filters
+            </h3>
+            <div>
+              <button className="text-orange-400 text-lg font-semibold cursor-pointer" onClick={() => setCategoryType("all")}>
+                Reset All
               </button>
             </div>
           </div>
@@ -152,17 +126,15 @@ export default function Allproducts() {
             </div>
           </div>
           {/* product view section  */}
-          <div className={cn("grid gap-5 pb-8 min-h-screen", gridView && "grid-cols-1 xs:grid-cols-2 md:grid-cols-3")}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {product.slice(pagesVisited, pagesVisited + userPerPage).map((item) => (
-              <div key={item.idMeal}>
-                <Card
-                  cardImg={item.strMealThumb}
-                  cardTitle={item.strMeal}
-                  cardSubtitle={item.strTags}
-                  className={cn(gridView || "grid grid-cols-2 gap-2 sm:gap-8 items-center")}
-                  onClick={() => navigate(`/${item.idMeal}`)}
-                />
-              </div>
+              <Card
+                key={item.idMeal}
+                cardImg={item.strMealThumb}
+                cardTitle={item.strMeal}
+                cardSubtitle={item.strTags}
+                onClick={() => navigate(`/${item.idMeal}`)}
+              />
             ))}
           </div>
         </div>

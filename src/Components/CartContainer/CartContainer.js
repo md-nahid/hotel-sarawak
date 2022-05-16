@@ -1,95 +1,107 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData, showSearch } from "../../Redux/Actions";
 // icons
 import { Icon } from "@iconify/react";
 
 export default function CartContainer() {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
   let [showCart, setShowCart] = useState(false);
-  let [cartData, setCartData] = useState([]);
-  const { count } = useSelector((state) => state.cartCount);
-  const { products } = useSelector((state) => state.cartCount);
-  // setting cart values
-  useEffect(() => {
-    // other code
-    fetch("products.json")
-      .then((req) => req.json())
-      .then(function (res) {
-        for (let i = 0; i <= products.length; i++)
-          res.meals.forEach((meal) => {
-            if (meal.idMeal === products[i]) {
-              setCartData([...cartData, meal]);
-            }
-          });
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [products]);
+  const { cart } = useSelector((state) => state.cartCount);
+  const user = useSelector((state) => state.login);
 
-  // onBlur function
-  function handleBlur(event) {
-    if (!event.currentTarget.contains(event.relatedTarget)) {
+  // fetch data when this component loads
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  // handlelogin
+  function handleLogin() {
+    if (user) {
+      navigate("/mycart");
       setShowCart(false);
     } else {
-      setShowCart(true);
+      console.log("please log in");
+      setShowCart(false);
     }
   }
+
   return (
     <div
-      className=" py-2 px-3 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl relative"
-      onBlur={handleBlur}
+      className=" py-2 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl relative"
+      onBlur={(event) => (!event.currentTarget.contains(event.relatedTarget) ? setShowCart(false) : setShowCart(true))}
     >
       <div className="flex justify-around items-center">
-        <button
-          className="relative cursor-pointer"
-          onClick={() => setShowCart(!showCart)}
-        >
-          <Icon icon="bi:cart-check-fill" />
+        <button className="xmd:hidden" onClick={() => dispatch(showSearch())}>
+          <Icon icon="charm:search" />
+        </button>
+        <button className="relative">
+          <Icon icon="material-symbols:favorite-rounded" />
           <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
-            {count}
+            0
           </span>
         </button>
-        <div className="flex items-center">
+        <button className="relative" onClick={() => setShowCart(!showCart)}>
+          <Icon icon="bi:cart-check-fill" />
+          <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
+            {cart.length}
+          </span>
+        </button>
+        <button className="flex items-center" onClick={handleLogin}>
           <span>
             <Icon icon="ant-design:user-outlined" />
           </span>
           <span className="ml-2 flex">
             <strong>A</strong> <span className="hidden md:block">ccount</span>
           </span>
-        </div>
+        </button>
       </div>
       {showCart && (
-        <div className="absolute w-full bg-DarkOrange rounded left-0 top-[110%]">
-          {products.length ? (
-            <AllcartItems allcartItems={cartData} />
-          ) : (
-            <EmptyCart />
-          )}
+        <div className="absolute bg-DarkOrange min-w-full rounded right-0 py-2 px-4 top-[110%]">
+          {cart.length ? <AllcartItems allcartItems={cart} onClick={handleLogin} /> : <EmptyCart />}
         </div>
       )}
     </div>
   );
 }
 
-function AllcartItems({ allcartItems }) {
+function AllcartItems({ allcartItems, onClick }) {
   return (
-    <div>
-      {allcartItems.map((item, index) => (
-        <div
-          key={index}
-          className="grid grid-cols-[1fr_30px] gap-3 items-center p-2"
-        >
-          <div className="grid grid-cols-[30px_1fr] gap-3 items-center cursor-pointer">
-            <div className="rounded-md overflow-hidden">
-              <img src={item.strMealThumb} alt="product" className="w-full" />
-            </div>
-            <div>
-              <h5>{item.strMeal}</h5>
-            </div>
-          </div>
-        </div>
-      ))}
-      <button className="text-slate-200 text-sm text-center w-full border-t border-slate-200 p-2">
-        Checkout
-      </button>
+    <div className="min-w-max">
+      <table className="w-full">
+        <thead className="border-b">
+          <tr className="text-sm text-center grid grid-cols-4 gap-3">
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th className="text-right">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          {allcartItems.map((item, index) => (
+            <tr key={index} className="grid grid-cols-4 gap-3 text-center py-3">
+              <td className="grid grid-cols-[30px_1fr] gap-3 items-center cursor-pointer">
+                <div className="rounded-md overflow-hidden">
+                  <img src={item.strMealThumb} alt="product" className="w-full" />
+                </div>
+                <div>
+                  <p>{item.strMeal}</p>
+                </div>
+              </td>
+              <td>$ {item.price}</td>
+              <td>{item.qty}</td>
+              <td className="text-right">$ {item.total}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className=" pt-2 text-right">
+        <button className="text-slate-800 text-sm font-semibold inline-block py-2 px-4 bg-yellow-400 rounded-md" onClick={onClick}>
+          View Cart
+        </button>
+      </div>
     </div>
   );
 }
