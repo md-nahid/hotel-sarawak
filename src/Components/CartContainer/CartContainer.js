@@ -10,6 +10,7 @@ export default function CartContainer() {
   let navigate = useNavigate();
   let [showCart, setShowCart] = useState(false);
   const { cart } = useSelector((state) => state.cartCount);
+  const fav = useSelector((state) => state.favoriteCount);
   const user = useSelector((state) => state.login);
   // fetch data when this component loads
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function CartContainer() {
         <button className="relative hidden md:block">
           <Icon icon="material-symbols:favorite-rounded" />
           <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
-            0
+            {fav.length}
           </span>
         </button>
         <button className="relative" onClick={() => setShowCart(!showCart)}>

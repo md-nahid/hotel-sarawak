@@ -4,12 +4,12 @@ import { Icon } from "@iconify/react";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 
-export default function Card({ cardImg, cardTitle, cardSubtitle, onClick }) {
+export default function Card({ cardImg, cardTitle, cardSubtitle, onClick, addtoFavorite }) {
   return (
     <div>
       <div className="relative overflow-hidden rounded-md">
         <img src={cardImg} alt="product" className="w-full object-cover rounded-md" />
-        <button className="absolute right-5 top-5 text-xl text-orange-500 p-4 rounded-full bg-yellow-50 bg-opacity-60">
+        <button className="absolute right-2 top-2 text-xl text-white p-4 rounded-full bg-red-400 bg-opacity-60" onClick={addtoFavorite}>
           <Icon icon="ic:twotone-favorite-border" />
         </button>
       </div>

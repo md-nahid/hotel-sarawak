@@ -1,11 +1,20 @@
 import { SHOW_SEARCH } from "../Constants";
 import { HIDE_SEARCH } from "../Constants";
+import { ADD_TO_FAVORITE } from "../Constants";
 
 // cart increment action
 export default function increment(productId) {
   return {
     type: "INCREMENT",
     payload: productId,
+  };
+}
+
+// favorites increment action
+export function addToFavorite(id) {
+  return {
+    type: ADD_TO_FAVORITE,
+    payload: id,
   };
 }
 

@@ -1,129 +1,65 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Layout from "../Layout/Layout";
+import { socialData } from "./Footer.data";
+import useWindowsize from "../../Hooks/useWindowsize";
 // import Images and icons
-import Logo from "../../Images/logo.svg";
-import { Icon } from "@iconify/react";
+import MobileLogo from "../../Images/mobilelogo.svg";
 import Headphone from "../../Images/headphone.svg";
 
 export default function Footer() {
+  let width = useWindowsize();
   return (
-    <div className="bg-black">
-      <Layout>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-gray-200 py-5 md:py-6 lg:py-8">
-          <div>
-            <img src={Logo} alt="logo" className="bg-transparent w-8/12 mb-5" />
-            <p className="text-lg text-gray-200 leading-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <div className="flex items-center mt-5 ">
-              <a
-                href="https://facebook.com"
-                className="w-10 h-10 rounded inline-flex justify-center items-center bg-slate-300 text-gray-500 hover:bg-orange-600 mr-3 
-              hover:text-black duration-300 no-underline"
-              >
-                <Icon icon="akar-icons:youtube-fill" />
+    <div className="bg-black px-2 xmd:px-5 xl:px-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 text-gray-200 py-10 md:py-24">
+        <div>
+          <Link to="/" className="inline-block">
+            <img src={MobileLogo} alt="logo" className="w-16" />
+          </Link>
+          <p className="text-lg text-gray-200 leading-8">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <div className="grid grid-cols-[20px_20px_20px_20px] gap-5 mt-5">
+            {socialData.map((item) => (
+              <a key={item.name} href="https://facebook.com" className="inline-block hover:opacity-70">
+                <img src={item.img} alt={item.name} />
               </a>
-              <a
-                href="https://facebook.com"
-                className="w-10 h-10 rounded inline-flex justify-center items-center bg-slate-300 text-gray-500 hover:bg-orange-600  mr-3
-              hover:text-black duration-300 no-underline"
-              >
-                <Icon icon="akar-icons:linkedin-box-fill" />
-              </a>
-              <a
-                href="https://facebook.com"
-                className="w-10 h-10 rounded inline-flex justify-center items-center bg-slate-300 text-gray-500 hover:bg-orange-600  mr-3
-              hover:text-black duration-300 no-underline"
-              >
-                <Icon icon="akar-icons:twitter-fill" />
-              </a>
-              <a
-                href="https://facebook.com"
-                className="w-10 h-10 rounded inline-flex justify-center items-center bg-slate-300 text-gray-500 hover:bg-orange-600  mr-3
-              hover:text-black duration-300 no-underline"
-              >
-                <Icon icon="brandico:facebook" />
-              </a>
-              <a
-                href="https://facebook.com"
-                className="w-10 h-10 rounded inline-flex justify-center items-center bg-slate-300 text-gray-500 hover:bg-orange-600  mr-3
-              hover:text-black duration-300 no-underline"
-              >
-                <Icon icon="akar-icons:instagram-fill" />
-              </a>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-2 justify-between">
-            <div className="grid grid-cols-1 gap-5">
-              <h4 className="text-lg text-orange-600 uppercase font-bold tracking-wider ">
-                quick links
-              </h4>
-              <Link className="normal-case tracking-wider" to="/">
-                Link 1
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Link 2
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Link 3
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Link 4
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Link 5
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 gap-5">
-              <h4 className="text-lg text-orange-600 capitalize font-bold tracking-wider ">
-                title here
-              </h4>
-              <Link className="normal-case tracking-wider" to="/">
-                Title name here
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Title name here
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Title name here
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Title name here
-              </Link>
-              <Link className="normal-case tracking-wider" to="/">
-                Title name here
-              </Link>
-            </div>
-          </div>
-          <div>
-            <h4 className="text-lg text-orange-600 uppercase font-bold tracking-wider mb-8 ">
-              contact
-            </h4>
-            <p className="text-slate-200 text-lg leading-8">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Reprehenderit, natus?
-            </p>
-            <div className="mt-10 grid grid-flow-col flex-wrap gap-1">
-              <img src={Headphone} alt="logo" />
-              <span>
-                <p>Have any question?</p>
-                <p className="text-orange-600 font-bold tracking-wider">
-                  +123 456 789
-                </p>
-              </span>
-              <button className="px-7 py-3 text-xsm text-white font-bold border-2 border-orange-600 rounded-lg hover:bg-orange-600 duration-300 ">
-                live chat
-              </button>
-            </div>
+            ))}
           </div>
         </div>
-      </Layout>
-      <div className="w-full border-t-2 border-gray-400"></div>
+        {width > 767 && (
+          <div className="text-center">
+            <h4 className="text-lg text-orange-600 uppercase font-bold tracking-wider">quick links</h4>
+            <div className="mt-9 inline-flex flex-col">
+              {Array.from({ length: 5 }, (_, i) => (
+                <Link key={i} className="normal-case tracking-wider hover:text-orange-500 mt-3" to="/">
+                  About Us
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+        <div>
+          <h4 className="text-lg text-orange-600 uppercase font-bold tracking-wider mb-8">contact</h4>
+          <p className="text-slate-200 text-lg leading-8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, natus?</p>
+          <div className="flex items-center flex-wrap">
+            <div className="flex items-center mr-10 mt-10">
+              <img src={Headphone} alt="logo" className="mr-10" />
+              <span>
+                <p>Have any question?</p>
+                <p className="text-orange-600 font-bold tracking-wider">+123 456 789</p>
+              </span>
+            </div>
+            <button className="px-7 py-3 max-w-[189px] w-full mt-10 text-xsm text-white font-bold border-2 border-orange-600 rounded-lg hover:bg-orange-600 duration-300 ">
+              live chat
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="w-full border-t border-orange-800"></div>
       <Layout>
         <p className="py-4 text-center text-white">
-          Hotel Sarawak Food - <span>&copy;</span> 2022 All Rights Reserved
+          <span>&copy;</span> Hotel Sarawak Food - 2022 All Rights Reserved
         </p>
       </Layout>
     </div>
