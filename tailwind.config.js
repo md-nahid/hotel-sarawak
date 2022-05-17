@@ -3,7 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        roboto: "'Roboto', sans-serif",
+        meriweather: "'Merriweather', serif",
+        lato: "'Lato', sans-serif",
       },
       backgroundColor: {
         DarkOrange: "#F04135",

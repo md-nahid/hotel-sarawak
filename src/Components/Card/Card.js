@@ -18,7 +18,12 @@ export default function Card({ cardImg, cardTitle, cardSubtitle, onClick, addtoF
           <Link to="/" className="text-lg font-bold capitalize hover:underline">
             {cardTitle}
           </Link>
-          <span>3.5 K</span>
+          <p className="flex items-center font-lato font-bold text-orange-600">
+            <span className="mr-1">
+              <Icon icon="bxs:star" />
+            </span>
+            <span>4.8</span>
+          </p>
         </h4>
         <p className="text-sm font-normal capitalize break-words">{cardSubtitle}</p>
         <div className="flex justify-between flex-wrap items-center mt-3">
