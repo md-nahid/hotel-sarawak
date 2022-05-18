@@ -1,29 +1,47 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { showSearch } from "../../Redux/Actions";
-// import icons
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { hideSearch } from "../../Redux/Actions";
+import Card from "../Card/Card";
+import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 
 export default function Search() {
-  let dispatch = useDispatch();
+  const dispatch = useDispatch();
+  let [value, setValue] = useState("");
+  const { products } = useSelector((state) => state.cartCount);
   return (
-    <div className="max-w-[1170px] w-full m-auto h-full">
-      <div className="relative">
+    <motion.div className="fixed top-0 left-0 w-full h-screen bg-yellow-400 pb-3 overflow-y-scroll z-50" animate={animate}>
+      <div className="w-full sticky top-0 z-50 bg-white py-3">
         <input
           type="text"
-          id="search"
           placeholder="Search by names..."
-          className="w-full h-[48px] pl-5 pr-14 border-2 border-orange-600 outline-none rounded-lg bg-white"
-          onFocus={() => dispatch(showSearch())}
+          className="w-full h-full pl-5 pr-14 rounded-md outline-none text-xl text-center py-1 sm:py-3 md:py-5"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          autoFocus={true}
         />
-        <span className="absolute right-5 top-1/2 -translate-x-1/4 -translate-y-1/2">
-          <label htmlFor="search" className="cursor-pointer">
-            <Icon icon="charm:search" />
-          </label>
-        </span>
+        <button
+          className="absolute right-5 top-1/2 -translate-y-1/2 text-xl text-gray-500 hover:text-gray-900"
+          onClick={() => {
+            setValue("");
+            dispatch(hideSearch());
+          }}
+        >
+          <Icon icon="akar-icons:cross" />
+        </button>
       </div>
-    </div>
+      <div className="py-5 px-3 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+        {products
+          .filter((item) => item.strMeal.toLowerCase().includes(value))
+          .map((prod) => (
+            <Card key={prod.idMeal} cardImg={prod.strMealThumb} cardTitle={prod.strMeal} cardSubtitle={prod.strTags} />
+          ))}
+      </div>
+    </motion.div>
   );
 }
-
-// onMouseDown={(e) => e.target === blurDiv.current && dispatch(hideSearch())}
+// serarch result animate values
+const animate = {
+  opacity: [0, 1],
+  transition: { duration: 0.3 },
+};

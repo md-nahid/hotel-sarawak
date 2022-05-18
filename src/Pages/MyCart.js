@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Components/Layout/Layout";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import cn from "classnames";
 
 export default function MyCart() {
   const [productType, setProductType] = useState("");
+  let location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/mycart/favorites") {
+      setProductType("favorites");
+    } else if (location.pathname === "/mycart") {
+      setProductType("");
+    }
+  }, [location]);
   return (
     <div className="mt-10">
       <div className="max-w-xl w-full m-auto grid grid-cols-2 gap-5 text-center">

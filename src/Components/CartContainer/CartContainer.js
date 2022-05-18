@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../Redux/Actions";
+import { useSelector } from "react-redux";
 // icons
 import { Icon } from "@iconify/react";
 
 export default function CartContainer() {
-  let dispatch = useDispatch();
   let navigate = useNavigate();
   let [showCart, setShowCart] = useState(false);
   const { cart } = useSelector((state) => state.cartCount);
   const fav = useSelector((state) => state.favoriteCount);
   const user = useSelector((state) => state.login);
-  // fetch data when this component loads
-  useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
-
   // handlelogin
   function handleLogin() {
     if (user) {
@@ -29,44 +22,32 @@ export default function CartContainer() {
   }
 
   return (
-    <div
-      className="py-2 rounded border-2 bg-orange-600 border-orange-600 text-white text-xl relative"
-      onBlur={(event) => (!event.currentTarget.contains(event.relatedTarget) ? setShowCart(false) : setShowCart(true))}
-    >
-      <div className="flex justify-around items-center">
-        <button className="relative hidden md:block">
-          <Icon icon="material-symbols:favorite-rounded" />
-          <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
-            {fav.length}
-          </span>
-        </button>
-        <button className="relative" onClick={() => setShowCart(!showCart)}>
-          <Icon icon="bi:cart-check-fill" />
-          <span className="absolute top-0 right-0 translate-x-3 -translate-y-2 w-4 h-4 rounded-full flex justify-center items-center bg-orange-400 text-xs">
-            {cart.length}
-          </span>
-        </button>
-        <button className="flex items-center" onClick={handleLogin}>
-          <span>
-            <Icon icon="ant-design:user-outlined" />
-          </span>
-          <span className="ml-2 flex">
-            <strong>A</strong> <span className="hidden md:block">ccount</span>
-          </span>
-        </button>
-      </div>
-      {showCart && (
-        <div className="absolute bg-DarkOrange min-w-full rounded right-0 py-2 px-4 top-[110%]">
-          {cart.length ? <AllcartItems allcartItems={cart} onClick={handleLogin} /> : <EmptyCart />}
-        </div>
-      )}
+    <div className="flex" onBlur={(event) => (!event.currentTarget.contains(event.relatedTarget) ? setShowCart(false) : setShowCart(true))}>
+      <button
+        className="relative p-2 text-3xl border-[1px] border-green-500 rounded-full mr-5 text-green-500"
+        onClick={() => navigate("/mycart/favorites")}
+      >
+        <Icon icon="material-symbols:favorite-rounded" />
+        <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-green-600 text-white text-lg">{fav.length}</span>
+      </button>
+      <button
+        className="relative p-2 text-3xl border-[1px] border-orange-500 rounded-full mr-5 text-orange-500"
+        onClick={() => setShowCart(!showCart)}
+      >
+        <Icon icon="bi:cart-check-fill" />
+        <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-orange-500 text-white text-lg">{cart.length}</span>
+      </button>
+      <button className="p-2 text-3xl border-[1px] border-slate-500 rounded-full text-slate-500" onClick={handleLogin}>
+        <Icon icon="ant-design:user-outlined" />
+      </button>
+      {showCart && <div className="">{cart.length ? <AllcartItems allcartItems={cart} onClick={handleLogin} /> : <EmptyCart />}</div>}
     </div>
   );
 }
 
 function AllcartItems({ allcartItems, onClick }) {
   return (
-    <div className="min-w-max">
+    <div className="min-w-max absolute bg-DarkOrange max-w-fit w-full rounded right-5 py-2 px-4 top-full">
       <table className="w-full">
         <thead className="border-b">
           <tr className="text-sm text-center grid grid-cols-4 gap-3">
@@ -105,13 +86,12 @@ function AllcartItems({ allcartItems, onClick }) {
 
 function EmptyCart() {
   return (
-    <div className="text-sm flex justify-center items-center min-h-[100px]">
-      <div className="text-center">
+    <div className="text-sm absolute bg-DarkOrange rounded right-5 py-10 px-20 top-full">
+      <div className="text-center text-slate-50">
         <p className="text-yellow-400 text-4xl flex justify-center mb-2">
           <Icon icon="el:shopping-cart-sign" />
         </p>
-        <p>Your Cart Is</p>
-        <p>Empty</p>
+        <p className="text-xl">Empty</p>
       </div>
     </div>
   );

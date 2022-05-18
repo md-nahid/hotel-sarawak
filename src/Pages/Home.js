@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../Components/Card/Card";
 import Carousel from "../Components/Carousel/Carousel";
@@ -9,12 +9,16 @@ import increment, { addToFavorite } from "../Redux/Actions";
 import Tabs from "../Components/Tabs/Tabs";
 import { motion } from "framer-motion";
 import MostSoldProduct from "../Components/MostSoledProduct/MostSoldProduct";
-// import images
+import { fetchData } from "../Redux/Actions";
 
 export default function Home() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.cartCount);
   const [productType, setProductType] = useState("cake-milk");
+  // fetch data when this component loads
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
   return (
     <div>
       <div className="max-w-screen-xl w-full px-0 sm:px-4 m-auto mt-11">
