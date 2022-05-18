@@ -1,11 +1,21 @@
-import { SHOW_SEARCH } from "../Constants";
-import { HIDE_SEARCH } from "../Constants";
-import { ADD_TO_FAVORITE } from "../Constants";
+import { SHOW_SEARCH, HIDE_SEARCH, INCREMENT, DECREMENT, REMOVE_FROM_CART, ADD_TO_FAVORITE } from "../Constants";
 
 // cart increment action
 export default function increment(productId) {
   return {
-    type: "INCREMENT",
+    type: INCREMENT,
+    payload: productId,
+  };
+}
+export function decrement(productId) {
+  return {
+    type: DECREMENT,
+    payload: productId,
+  };
+}
+export function removefromCart(productId) {
+  return {
+    type: REMOVE_FROM_CART,
     payload: productId,
   };
 }

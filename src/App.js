@@ -5,6 +5,8 @@ import Approutes from "./Routes";
 import Newsletter from "./Components/Newsletter/Newsletter";
 import Footer from "./Components/Footer/Footer";
 import cn from "classnames";
+import { Toaster } from "react-hot-toast";
+import toastOptions from "./Components/Toastoptions/Toastoptions";
 // swiper css
 import "swiper/css/bundle";
 
@@ -25,6 +27,7 @@ function App() {
 
   return (
     <div className={cn(state && "bg-slate-50")}>
+      <Toaster position="top-center" toastOptions={toastOptions} />
       <Topbar />
       <Approutes />
       <Newsletter />

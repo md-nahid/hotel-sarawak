@@ -1,5 +1,4 @@
-import { SHOW_SEARCH } from "../Constants";
-import { HIDE_SEARCH } from "../Constants";
+import { SHOW_SEARCH, HIDE_SEARCH } from "../Constants";
 
 let initialState = false;
 

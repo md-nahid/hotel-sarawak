@@ -38,8 +38,8 @@ export default function Home() {
               All Products
             </Link>
           </div>
-          <div className="mt-5">
-            <Tabs onClick={(v) => setProductType(v)} productType={productType} />
+          <div className="mt-5 grid grid-cols-4 gap-0 text-center border-b-4 border-slate-200">
+            <Tabs onClick={(v) => setProductType(v)} productType={productType} buttonsarr={buttonsarr} />
           </div>
         </div>
         {/* product list  */}
@@ -70,3 +70,23 @@ const animate = {
   opacity: [0, 1],
   transition: { duration: 0.5 },
 };
+
+// button groups
+const buttonsarr = [
+  {
+    label: "Cake & milk",
+    value: "cake-milk",
+  },
+  {
+    label: "Coffes & Teas",
+    value: "coffes-teas",
+  },
+  {
+    label: "Vegetables",
+    value: "vegetable",
+  },
+  {
+    label: "Desert",
+    value: "desert",
+  },
+];
