@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Layout from "../Components/Layout/Layout";
 import Counter from "../Components/Counter/Counter";
 import DateInput from "../Components/Datepicker/Datepicker";
-
 // import iamges
 import Dishimg from "../Images/bigimg.png";
 import { Icon } from "@iconify/react";

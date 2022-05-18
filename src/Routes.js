@@ -5,10 +5,12 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 const Allproducts = React.lazy(() => import("./Pages/Allproducts"));
 const ProductDetails = React.lazy(() => import("./Pages/ProductDetails"));
-const Checkout = React.lazy(() => import("./Pages/Checkout"));
+const Checkout = React.lazy(() => import("./Pages/Checkoutpage"));
 const MyCart = React.lazy(() => import("./Pages/MyCart"));
 const MyCartitems = React.lazy(() => import("./Pages/MyCartchild/MyCartitems"));
 const MyFavoriteitems = React.lazy(() => import("./Pages/MyCartchild/MyFavoriteitems"));
+const Auth = React.lazy(() => import("./Pages/Authentication/Auth"));
+const Login = React.lazy(() => import("./Pages/Authentication/Login"));
 
 export default function Approutes() {
   return (
@@ -59,6 +61,23 @@ export default function Approutes() {
           element={
             <Suspense fallback="Loading">
               <MyFavoriteitems />
+            </Suspense>
+          }
+        />
+      </Route>
+      <Route
+        path="auth"
+        element={
+          <Suspense fallback="Loading">
+            <Auth />
+          </Suspense>
+        }
+      >
+        <Route
+          index
+          element={
+            <Suspense fallback="Loading">
+              <Login />
             </Suspense>
           }
         />
