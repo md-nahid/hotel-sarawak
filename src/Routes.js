@@ -7,6 +7,8 @@ const Allproducts = React.lazy(() => import("./Pages/Allproducts"));
 const ProductDetails = React.lazy(() => import("./Pages/ProductDetails"));
 const Checkout = React.lazy(() => import("./Pages/Checkout"));
 const MyCart = React.lazy(() => import("./Pages/MyCart"));
+const MyCartitems = React.lazy(() => import("./Pages/MyCartchild/MyCartitems"));
+const MyFavoriteitems = React.lazy(() => import("./Pages/MyCartchild/MyFavoriteitems"));
 
 export default function Approutes() {
   return (
@@ -43,7 +45,24 @@ export default function Approutes() {
             <MyCart />
           </Suspense>
         }
-      />
+      >
+        <Route
+          index
+          element={
+            <Suspense fallback="Loading">
+              <MyCartitems />
+            </Suspense>
+          }
+        />
+        <Route
+          path="favorites"
+          element={
+            <Suspense fallback="Loading">
+              <MyFavoriteitems />
+            </Suspense>
+          }
+        />
+      </Route>
     </Routes>
   );
 }
