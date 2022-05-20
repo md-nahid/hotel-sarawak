@@ -48,7 +48,7 @@ export default function CartContainer() {
       </button>
       <button
         className="p-2 text-3xl border-[1px] border-slate-500 rounded-full text-slate-500"
-        onClick={() => (user ? navigate("/mycart") : navigate("auth/login"))}
+        onClick={() => (user ? navigate("/mycart") : navigate("/auth"))}
       >
         <Icon icon="ant-design:user-outlined" />
       </button>

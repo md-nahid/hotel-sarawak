@@ -11,6 +11,7 @@ const MyCartitems = React.lazy(() => import("./Pages/MyCartchild/MyCartitems"));
 const MyFavoriteitems = React.lazy(() => import("./Pages/MyCartchild/MyFavoriteitems"));
 const Auth = React.lazy(() => import("./Pages/Authentication/Auth"));
 const Login = React.lazy(() => import("./Pages/Authentication/Login"));
+const Signup = React.lazy(() => import("./Pages/Authentication/Signup"));
 
 export default function Approutes() {
   return (
@@ -78,6 +79,14 @@ export default function Approutes() {
           element={
             <Suspense fallback="Loading">
               <Login />
+            </Suspense>
+          }
+        />
+        <Route
+          path="signup"
+          element={
+            <Suspense fallback="Loading">
+              <Signup />
             </Suspense>
           }
         />
