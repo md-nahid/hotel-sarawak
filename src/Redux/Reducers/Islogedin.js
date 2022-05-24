@@ -1,4 +1,4 @@
-let initialState = false;
+let initialState = true;
 
 export default function isLogedin(state = initialState, action) {
   switch (action.type) {

@@ -27,14 +27,14 @@ export default function Mobilemenu() {
         <Icon icon="charm:search" />
       </button>
       <button
-        className="relative p-2 text-xl border-[1px] border-green-500 rounded-full mr-5 text-green-500"
+        className="relative p-2 text-xl border-[1px] border-red-500 rounded-full mr-5 text-red-500"
         onClick={() => navigate("mycart/favorites")}
       >
         <Icon icon="material-symbols:favorite-rounded" />
-        <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-green-600 text-white text-lg">{fav.length}</span>
+        <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-red-600 text-white text-lg">{fav.length}</span>
       </button>
       <button className="relative p-2 text-xl border-[1px] border-orange-500 rounded-full mr-5 text-orange-500" onClick={() => navigate("mycart")}>
-        <Icon icon="bi:cart-check-fill" />
+        <Icon icon="heroicons-solid:shopping-bag" />
         <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-orange-500 text-white text-lg">{cart.length}</span>
       </button>
       <button className="p-2 text-xl border-[1px] border-slate-500 rounded-full text-slate-500" onClick={handleLogin}>

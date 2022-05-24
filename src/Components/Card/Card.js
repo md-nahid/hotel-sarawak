@@ -9,7 +9,10 @@ export default function Card({ cardImg, cardTitle, cardSubtitle, onClick, addtoF
     <div>
       <div className="relative overflow-hidden rounded-md">
         <img src={cardImg} alt="product" className="w-full object-cover rounded-md" />
-        <button className="absolute right-2 top-2 text-xl text-white p-4 rounded-full bg-red-400 bg-opacity-60" onClick={addtoFavorite}>
+        <button
+          className="absolute right-2 top-2 text-xl text-white p-4 rounded-full bg-red-400 bg-opacity-60 hover:bg-red-700 duration-300"
+          onClick={addtoFavorite}
+        >
           <Icon icon="ic:twotone-favorite-border" />
         </button>
       </div>

@@ -6,8 +6,7 @@ const initialState = [];
 export default function FavoriteReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_FAVORITE:
-      // check if already added
-      const exist = state.find((x) => (x === action.payload ? true : false));
+      const exist = state.find((x) => (x.idMeal === action.payload.idMeal ? true : false));
       if (exist) {
         toast("Already added to favorite", favorite);
       } else {

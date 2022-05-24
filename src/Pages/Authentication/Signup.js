@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import FormControl from "../../Components/FormControl/FormControl";
-import Select from "react-select";
+import CustomSelect from "../../Components/Select/Select";
+import { countryOptions } from "../../Components/Alldata/Select.data";
+import Checkbox from "../../Components/Checkbox/Checkbox";
 // import images and icons
 // import { Icon } from "@iconify/react";
 
@@ -9,6 +11,8 @@ export default function Signup() {
   const [formData, setFormData] = useState({
     fullName: "",
     mailNo: "",
+    streetAddress: "",
+    terms: false,
   });
   return (
     <div>
@@ -41,7 +45,29 @@ export default function Signup() {
               onChange={(e) => setFormData({ ...formData, mailNo: e.target.value })}
             />
             <div>
-              <Select options={countryNames} />
+              <label className="font-semibold font-lato mb-1 block">Select Country</label>
+              <CustomSelect options={countryOptions} />
+            </div>
+            <FormControl
+              htmlFor="streetaddress"
+              type="text"
+              label="Street address"
+              placeholder=""
+              value={formData.streetAddress}
+              onChange={(e) => setFormData({ ...formData, streetAddress: e.target.value })}
+            />
+            <div>
+              <Checkbox
+                htmlFor="checkbox"
+                label="Aggree to our Terms and Conditions."
+                checked={formData.terms}
+                onChange={() => setFormData({ ...formData, terms: !formData.terms })}
+              />
+            </div>
+            <div className="text-right mt-4">
+              <button className="py-2 w-full px-5 text-lg bg-white text-red-600 font-semibold rounded-md border-2 border-transparent hover:bg-transparent duration-300 hover:text-white hover:border-white">
+                Submit
+              </button>
             </div>
           </div>
         </div>
@@ -49,8 +75,3 @@ export default function Signup() {
     </div>
   );
 }
-
-const countryNames = {
-  label: "",
-  value: "",
-};

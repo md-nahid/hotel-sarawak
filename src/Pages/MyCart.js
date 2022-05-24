@@ -32,9 +32,8 @@ export default function MyCart() {
         ))}
       </div>
       <Layout>
-        <div className="w-full mt-16 grid grid-cols-1 md:grid-cols-[1fr_0.5fr] gap-5">
+        <div className="w-full mt-14">
           <Outlet />
-          <div className="border-2 border-orange-600">subtotal</div>
         </div>
       </Layout>
     </div>

@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* home page swiper pagination customized  */
-@layer components {
-  .swiper-pagination-bullet {
-    @apply w-2 h-2 rounded bg-orange-400 opacity-100 duration-500;
-  }
-  .swiper-pagination-bullet-active {
-    @apply w-5 bg-DarkOrange;
-  }
-}
-
 /* write your custom styles for 3rd party components */
 @layer base {
   h1,
@@ -24,5 +14,14 @@
   }
   p {
     @apply font-lato;
+  }
+}
+/* home page swiper pagination customized  */
+@layer components {
+  .swiper-pagination-bullet {
+    @apply w-2 h-2 rounded bg-orange-400 opacity-100 duration-500;
+  }
+  .swiper-pagination-bullet-active {
+    @apply w-5 bg-DarkOrange;
   }
 }

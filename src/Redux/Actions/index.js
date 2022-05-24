@@ -22,9 +22,19 @@ export function removefromCart(productId) {
 
 // favorites increment action
 export function addToFavorite(id) {
-  return {
-    type: ADD_TO_FAVORITE,
-    payload: id,
+  return function (dispatch) {
+    fetch("products.json")
+      .then((req) => req.json())
+      .then((res) => {
+        res.meals.forEach((item) => {
+          if (item.idMeal === id) {
+            return dispatch({
+              type: ADD_TO_FAVORITE,
+              payload: item,
+            });
+          }
+        });
+      });
   };
 }
 
