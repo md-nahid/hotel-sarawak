@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import Cardtwo from "../../Components/Cardtwo/Cardtwo";
-import increment, { decrement, removefromCart } from "../../Redux/Actions";
-import { useSelector, useDispatch } from "react-redux";
-import Emptycart from "../../Components/Emptycart/Emptycart";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import Cardtwo from '../../Components/Cardtwo/Cardtwo';
+import increment, { decrement, removefromCart } from '../../Redux/Actions';
+import { useSelector, useDispatch } from 'react-redux';
+import Emptycart from '../../Components/Emptycart/Emptycart';
+import { Link } from 'react-router-dom';
 
 export default function MyCartitems() {
   const dispatch = useDispatch();

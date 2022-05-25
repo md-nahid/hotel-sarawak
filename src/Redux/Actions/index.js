@@ -1,4 +1,12 @@
-import { SHOW_SEARCH, HIDE_SEARCH, INCREMENT, DECREMENT, REMOVE_FROM_CART, ADD_TO_FAVORITE } from "../Constants";
+import {
+  SHOW_SEARCH,
+  HIDE_SEARCH,
+  INCREMENT,
+  DECREMENT,
+  REMOVE_FROM_CART,
+  REMOVE_FROM_FAV,
+  ADD_TO_FAVORITE,
+} from '../Constants';
 
 // cart increment action
 export default function increment(productId) {
@@ -19,11 +27,17 @@ export function removefromCart(productId) {
     payload: productId,
   };
 }
+export function removeFromFav(productId) {
+  return {
+    type: REMOVE_FROM_FAV,
+    payload: productId,
+  };
+}
 
-// favorites increment action
+// favorites add action
 export function addToFavorite(id) {
   return function (dispatch) {
-    fetch("products.json")
+    fetch('products.json')
       .then((req) => req.json())
       .then((res) => {
         res.meals.forEach((item) => {
@@ -41,11 +55,11 @@ export function addToFavorite(id) {
 // fetching data to redux cart store
 export function fetchData() {
   return function (dispatch) {
-    fetch("products.json")
+    fetch('products.json')
       .then((req) => req.json())
       .then((res) =>
         dispatch({
-          type: "FETCH_DATA",
+          type: 'FETCH_DATA',
           payload: res.meals,
         })
       );

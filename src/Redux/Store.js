@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./Reducers/Counter";
-import isLogedin from "./Reducers/Islogedin";
-import showSearchCom from "./Reducers/SearchReducer";
-import FavoriteReducer from "./Reducers/FavoriteReducer";
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './Reducers/Counter';
+import isLogedin from './Reducers/Islogedin';
+import showSearchCom from './Reducers/SearchReducer';
+import FavoriteReducer from './Reducers/FavoriteReducer';
 
 export const store = configureStore(
   {

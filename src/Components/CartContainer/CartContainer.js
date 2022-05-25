@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import Emptycart from "../Emptycart/Emptycart";
-import cn from "classnames";
-import { motion } from "framer-motion";
-import { removefromCart } from "../../Redux/Actions";
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Emptycart from '../Emptycart/Emptycart';
+import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
+import { removefromCart } from '../../Redux/Actions';
+import { showSearch } from '../../Redux/Actions';
+
 // icons
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react';
 
 export default function CartContainer() {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   let [showCart, setShowCart] = useState(false);
   const { cart } = useSelector((state) => state.cartCount);
@@ -16,27 +19,25 @@ export default function CartContainer() {
   const user = useSelector((state) => state.login);
 
   function handleClick(e) {
-    e.stopPropagation();
     let x = e.currentTarget.id;
     let y = e.target.id;
-    if (y === "cartOverlay") {
+    if (y === 'cartOverlay') {
       setShowCart(false);
-    }
-    if (x === "closeCart") {
+    } else if (x === 'closeCart') {
       setShowCart(false);
-    } else if (x === "checkout") {
+    } else if (x === 'checkout') {
       setShowCart(false);
       if (user) {
-        navigate("/checkout");
+        navigate('/checkout');
       } else {
-        navigate("/auth");
+        navigate('/auth');
       }
-    } else if (x === "viewCart") {
+    } else if (x === 'viewCart') {
       setShowCart(false);
       if (user) {
-        navigate("/mycart");
+        navigate('/mycart');
       } else {
-        navigate("/auth");
+        navigate('/auth');
       }
     }
   }
@@ -44,26 +45,38 @@ export default function CartContainer() {
   return (
     <div className="flex">
       <button
-        className="relative p-2 text-3xl border-[1px] border-red-500 rounded-full mr-5 text-red-500"
-        onClick={() => navigate("/mycart/favorites")}
+        className="p-2 text-3xl rounded-full mr-5 text-slate-500"
+        onClick={() => dispatch(showSearch())}
       >
-        <Icon icon="material-symbols:favorite-rounded" />
-        <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-red-600 text-white text-lg">{fav.length}</span>
+        <Icon icon="charm:search" />
       </button>
       <button
-        className="relative p-2 text-3xl border-[1px] border-orange-500 rounded-full mr-5 text-orange-500"
+        className="relative p-2 text-3xl rounded-full mr-5 text-red-500"
+        onClick={() => navigate('/mycart/favorites')}
+      >
+        <Icon icon="material-symbols:favorite-rounded" />
+        <span className="absolute top-0 right-0 px-1 rounded-full  bg-red-600 text-white text-sm">
+          {fav.length}
+        </span>
+      </button>
+      <button
+        className="relative p-2 text-3xl rounded-full mr-5 text-orange-500"
         onClick={() => setShowCart(!showCart)}
       >
         <Icon icon="heroicons-solid:shopping-bag" />
-        <span className="absolute -top-3 -right-3 px-2 rounded-full  bg-orange-500 text-white text-lg">{cart.length}</span>
+        <span className="absolute top-0 right-0 px-1 rounded-full  bg-orange-500 text-white text-sm">
+          {cart.length}
+        </span>
       </button>
       <button
         className="p-2 text-3xl border-[1px] border-slate-500 rounded-full text-slate-500"
-        onClick={() => (user ? navigate("/mycart") : navigate("/auth"))}
+        onClick={() => (user ? navigate('/mycart') : navigate('/auth'))}
       >
         <Icon icon="ant-design:user-outlined" />
       </button>
-      {showCart && <div>{<AllcartItems allcartItems={cart} onClick={handleClick} />}</div>}
+      <AnimatePresence>
+        {showCart && <AllcartItems allcartItems={cart} onClick={handleClick} />}
+      </AnimatePresence>
     </div>
   );
 }
@@ -79,6 +92,7 @@ function AllcartItems({ allcartItems, onClick }) {
     });
     setSubTotal(x);
   }, [subTotal, cart]);
+
   return (
     <div
       className="text-slate-700 fixed left-0 right-0 top-0 bottom-0 h-screen w-full bg-slate-700 bg-opacity-50 overflow-hidden"
@@ -89,7 +103,7 @@ function AllcartItems({ allcartItems, onClick }) {
         className="max-w-md w-full h-full ml-auto bg-white grid grid-rows-[80px_1fr_120px] gap-3"
         initial="initial"
         animate="animate"
-        exit="exit"
+        exit="initial"
         variants={variant}
       >
         <div className="flex justify-between items-center px-5 font-semibold text-xl bg-white w-full shadow-slate-100 shadow-md">
@@ -98,7 +112,12 @@ function AllcartItems({ allcartItems, onClick }) {
             <Icon icon="akar-icons:cross" />
           </button>
         </div>
-        <div className={cn("px-3 overflow-y-scroll", allcartItems.length || "flex justify-center items-center")}>
+        <div
+          className={cn(
+            'px-3 overflow-y-scroll',
+            allcartItems.length || 'flex justify-center items-center'
+          )}
+        >
           {allcartItems.length ? (
             allcartItems.map((item, index) => (
               <div key={index} className="grid grid-cols-[auto_1fr_auto] gap-5 items-center mb-4">
@@ -116,7 +135,10 @@ function AllcartItems({ allcartItems, onClick }) {
                   </div>
                 </div>
                 <div>
-                  <button className="text-lg hover:text-red-600" onClick={() => dispatch(removefromCart(item.idMeal))}>
+                  <button
+                    className="text-lg hover:text-red-600"
+                    onClick={() => dispatch(removefromCart(item.idMeal))}
+                  >
                     <Icon icon="akar-icons:cross" />
                   </button>
                 </div>
@@ -124,7 +146,10 @@ function AllcartItems({ allcartItems, onClick }) {
             ))
           ) : (
             <div className="">
-              <Emptycart title="Your cart is empty" subTitle="Please add product to your cart list" />
+              <Emptycart
+                title="Your cart is empty"
+                subTitle="Please add product to your cart list"
+              />
             </div>
           )}
         </div>
@@ -152,14 +177,10 @@ function AllcartItems({ allcartItems, onClick }) {
 const variant = {
   initial: {
     x: 999,
-    transition: { duration: 0.3 },
+    transition: { duration: 0.5 },
   },
   animate: {
     x: [999, 0],
-    transition: { duration: 0.3 },
-  },
-  exit: {
-    x: [0, 999],
-    transition: { duration: 0.3 },
+    transition: { duration: 0.5 },
   },
 };
