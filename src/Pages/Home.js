@@ -44,7 +44,9 @@ export default function Home() {
               All Products
             </Link>
           </div>
-          <div className="mt-5 grid grid-cols-4 gap-0 text-center border-b-4 border-slate-200">
+        </div>
+        <div className="sticky top-0 bg-white md:static z-30">
+          <div className="mt-5 grid grid-cols-4 gap-0 text-center border-b-4 border-slate-200 ">
             <Tabs
               onClick={(v) => {
                 setProductType(v);
