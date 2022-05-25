@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Card from "../Components/Card/Card";
-import Carousel from "../Components/Carousel/Carousel";
-import CatagoriesCarousel from "../Components/CatagoriesCarousel/CatagoriesCarousel";
-import Layout from "../Components/Layout/Layout";
-import { useSelector, useDispatch } from "react-redux";
-import increment, { addToFavorite } from "../Redux/Actions";
-import Tabs from "../Components/Tabs/Tabs";
-import { motion } from "framer-motion";
-import MostSoldProduct from "../Components/MostSoledProduct/MostSoldProduct";
-import { fetchData } from "../Redux/Actions";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Card from '../Components/Card/Card';
+import Carousel from '../Components/Carousel/Carousel';
+import CatagoriesCarousel from '../Components/CatagoriesCarousel/CatagoriesCarousel';
+import Layout from '../Components/Layout/Layout';
+import { useSelector, useDispatch } from 'react-redux';
+import increment, { addToFavorite } from '../Redux/Actions';
+import Tabs from '../Components/Tabs/Tabs';
+import { motion } from 'framer-motion';
+import MostSoldProduct from '../Components/MostSoledProduct/MostSoldProduct';
+import { fetchData } from '../Redux/Actions';
+import Loadmore from '../Components/Loadmore/Loadmore';
 
 export default function Home() {
   const dispatch = useDispatch();
+  const [slice, setSlice] = useState(8);
   const { products } = useSelector((state) => state.cartCount);
-  const [productType, setProductType] = useState("cake-milk");
+  const [productType, setProductType] = useState('cake-milk');
   // fetch data when this component loads
   useEffect(() => {
     dispatch(fetchData());
@@ -43,14 +45,21 @@ export default function Home() {
             </Link>
           </div>
           <div className="mt-5 grid grid-cols-4 gap-0 text-center border-b-4 border-slate-200">
-            <Tabs onClick={(v) => setProductType(v)} productType={productType} buttonsarr={buttonsarr} />
+            <Tabs
+              onClick={(v) => {
+                setProductType(v);
+                setSlice(8);
+              }}
+              productType={productType}
+              buttonsarr={buttonsarr}
+            />
           </div>
         </div>
         {/* product list  */}
         <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-10 min-h-[600px]">
           {products
             .filter((meal) => meal.strCategory === productType)
-            .slice(0, 8)
+            .slice(0, slice)
             .map((item) => (
               <motion.div key={item.idMeal} animate={animate}>
                 <Card
@@ -59,9 +68,13 @@ export default function Home() {
                   cardSubtitle={item.strTags}
                   onClick={() => dispatch(increment(item.idMeal))}
                   addtoFavorite={() => dispatch(addToFavorite(item.idMeal))}
+                  cardTitleLink={item.idMeal}
                 />
               </motion.div>
             ))}
+        </div>
+        <div className="text-center mt-10">
+          <Loadmore onClick={() => setSlice(slice + 8)} />
         </div>
       </Layout>
     </div>
@@ -78,19 +91,19 @@ const animate = {
 // button groups
 const buttonsarr = [
   {
-    label: "Cake & milk",
-    value: "cake-milk",
+    label: 'Cake & milk',
+    value: 'cake-milk',
   },
   {
-    label: "Coffes & Teas",
-    value: "coffes-teas",
+    label: 'Coffes & Teas',
+    value: 'coffes-teas',
   },
   {
-    label: "Vegetables",
-    value: "vegetable",
+    label: 'Vegetables',
+    value: 'vegetable',
   },
   {
-    label: "Desert",
-    value: "desert",
+    label: 'Desert',
+    value: 'desert',
   },
 ];

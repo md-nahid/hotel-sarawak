@@ -1,10 +1,17 @@
-import React from "react";
+import React from 'react';
 // import icons
-import { Icon } from "@iconify/react";
-import Button from "../Button/Button";
-import { Link } from "react-router-dom";
+import { Icon } from '@iconify/react';
+import Button from '../Button/Button';
+import { Link } from 'react-router-dom';
 
-export default function Card({ cardImg, cardTitle, cardSubtitle, onClick, addtoFavorite }) {
+export default function Card({
+  cardImg,
+  cardTitle,
+  cardSubtitle,
+  onClick,
+  addtoFavorite,
+  cardTitleLink,
+}) {
   return (
     <div>
       <div className="relative overflow-hidden rounded-md">
@@ -18,7 +25,7 @@ export default function Card({ cardImg, cardTitle, cardSubtitle, onClick, addtoF
       </div>
       <div className="px-3 py-1 sm:py-4 text-slate-900">
         <h4 className="flex justify-between items-center">
-          <Link to="/" className="text-lg font-bold capitalize hover:underline">
+          <Link to={cardTitleLink} className="text-lg font-bold capitalize hover:underline">
             {cardTitle}
           </Link>
           <p className="flex items-center font-lato font-bold text-orange-600">

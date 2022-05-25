@@ -1,31 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 // import { useParams } from "react-router-dom";
-import Layout from "../Components/Layout/Layout";
-import ProductCarousel from "../Components/ProductCarousel/ProductCarousel";
-import Card from "../Components/Card/Card";
+import Layout from '../Components/Layout/Layout';
+import ProductCarousel from '../Components/ProductCarousel/ProductCarousel';
+import Card from '../Components/Card/Card';
+import { useSelector, useDispatch } from 'react-redux';
+import increment from '../Redux/Actions';
 // import icons and images
-import { Icon } from "@iconify/react";
-import Giftbox from "../Images/giftbox.svg";
-import Mobile from "../Images/mobile.svg";
-import Offerimg from "../Images/offerimg.png";
-import Restaurantlogo from "../Images/restaurantlogo.png";
-import Menuimg1 from "../Images/menuimg1.png";
-import Menuimg2 from "../Images/menuimg2.png";
-import Menuimg3 from "../Images/menuimg3.png";
-import Menuimg4 from "../Images/menuimg4.png";
-import Customerimg from "../Images/customerimg.png";
+import { Icon } from '@iconify/react';
+import Giftbox from '../Images/giftbox.svg';
+import Mobile from '../Images/mobile.svg';
+import Offerimg from '../Images/offerimg.png';
+import Restaurantlogo from '../Images/restaurantlogo.png';
+import Menuimg1 from '../Images/menuimg1.png';
+import Menuimg2 from '../Images/menuimg2.png';
+import Menuimg3 from '../Images/menuimg3.png';
+import Menuimg4 from '../Images/menuimg4.png';
+import Customerimg from '../Images/customerimg.png';
 
 export default function ProductDetails() {
-  // let { productid } = useParams();3
   let navigate = useNavigate();
-  const [product, setProduct] = useState([]);
-  // set all products
-  useEffect(() => {
-    fetch("products.json")
-      .then((req) => req.json())
-      .then((res) => setProduct(res.meals));
-  }, []);
+  let dispatch = useDispatch();
+  let { products } = useSelector((state) => state.cartCount);
 
   return (
     <div>
@@ -33,7 +29,9 @@ export default function ProductDetails() {
         <div className="mt-10 mb-10 grid grid-flow-col sm:grid-cols-[100px_1fr] gap-5">
           <div className="hidden sm:block"></div>
           <div>
-            <h2 className="text-xl sm:text-2xl text-slate-900 font-medium capitalize">Three (3) Mini Cheesecakes</h2>
+            <h2 className="text-xl sm:text-2xl text-slate-900 font-medium capitalize">
+              Three (3) Mini Cheesecakes
+            </h2>
             <p className="text-sm text-black font-normal capitalize">Purple Monkey</p>
           </div>
         </div>
@@ -88,7 +86,9 @@ export default function ProductDetails() {
             <div className="bg-white rounded shadow-md mb-5 mt-5">
               <h4 className="p-4 text-lg font-semibold text-black">What you get</h4>
               <div className="p-4 border-t border-slate-200">
-                <h4 className="text-sm xs:text-lg font-semibold text-black pb-3">One (1) Japanese set meal (choose from):</h4>
+                <h4 className="text-sm xs:text-lg font-semibold text-black pb-3">
+                  One (1) Japanese set meal (choose from):
+                </h4>
                 <ul className="text-sm xs:text-sm list-disc ml-8">
                   <li>Salmon Sashimi, Salmon Teriyaki and Udon set</li>
                   <li>Ay Spicy Tonkotsu Nabe and Sushi set</li>
@@ -101,7 +101,10 @@ export default function ProductDetails() {
               <h4 className="p-4 text-lg font-semibold text-black">Fine Print</h4>
               <div className="p-4 border-t border-slate-200">
                 <ul className="text-sm xs:text-sm list-disc ml-8">
-                  <li>Valid Tue - Sun: Lunch: 12.00pm - 2.30pm. Dinner: 6pm - 10:30pm. Valid on public holidays.Close on Mon.</li>
+                  <li>
+                    Valid Tue - Sun: Lunch: 12.00pm - 2.30pm. Dinner: 6pm - 10:30pm. Valid on public
+                    holidays.Close on Mon.
+                  </li>
                   <li>Strictly valid for dine-in only.</li>
                   <li>Not valid with other offers / promotions / discounts.</li>
                   <li>Price includes service charges.</li>
@@ -115,7 +118,10 @@ export default function ProductDetails() {
                 <ul className="text-sm xs:text-sm list-disc ml-8">
                   <li>Reservation recommended.</li>
                   <li>Booking subject to availability.</li>
-                  <li>Please ensure that your reservation is made within the validity period stated on your voucher.</li>
+                  <li>
+                    Please ensure that your reservation is made within the validity period stated on
+                    your voucher.
+                  </li>
                   <li>Call / Whatsapp +123456789 for booking with:</li>
                   <li>Name</li>
                   <li>Date and time of reservation</li>
@@ -136,7 +142,9 @@ export default function ProductDetails() {
             </div>
             {/* customers reviews  */}
             <div className="bg-white rounded shadow-md mb-5 mt-5">
-              <h4 className="p-4 text-lg font-semibold text-black">What customers like about Tosaya Japanese Restaurant</h4>
+              <h4 className="p-4 text-lg font-semibold text-black">
+                What customers like about Tosaya Japanese Restaurant
+              </h4>
               <div className="border-t border-slate-200">
                 {/* customer review  */}
                 <div className="p-4 border-b border-slate-200 flex items-center">
@@ -159,10 +167,12 @@ export default function ProductDetails() {
                 </div>
               </div>
               <div className="flex justify-center items-center py-6">
-                <button className="bg-slate-200 text-gray-400 font-bold py-2 px-8 rounded-md hover:text-gray-600 mr-5">Preview</button>
+                <button className="bg-slate-200 text-gray-400 font-bold py-2 px-8 rounded-md hover:text-gray-600 mr-5">
+                  Preview
+                </button>
                 <button
                   className="bg-slate-200 text-gray-400 font-bold py-2 px-8 rounded-md hover:text-gray-600"
-                  onClick={() => navigate("/checkout")}
+                  onClick={() => navigate('/checkout')}
                 >
                   Next
                 </button>
@@ -173,7 +183,9 @@ export default function ProductDetails() {
           <div className="hidden xmd:block">
             {/* first box start  */}
             <div className="bg-white shadow-md py-5 rounded-md mb-5">
-              <h4 className="text-2xl text-black font-semibold border-b border-slate-200 pb-2 px-4">Price Variant</h4>
+              <h4 className="text-2xl text-black font-semibold border-b border-slate-200 pb-2 px-4">
+                Price Variant
+              </h4>
               <div className="px-4 py-5 border-b border-slate-200 ">
                 <p className="flex items-center text-red-600 font-bold">
                   <span>RM 15.00</span>
@@ -222,7 +234,9 @@ export default function ProductDetails() {
               <h4 className="p-4 text-lg font-semibold text-black">How to redeem</h4>
               <div className="p-4 border-y-[1px] border-slate-200 flex items-center">
                 <img src={Giftbox} alt="icon" className="w-[52px] mr-5" />
-                <p className="text-lg font-normal">Love gifting? Gift this deal to your Fave-ourite person!</p>
+                <p className="text-lg font-normal">
+                  Love gifting? Gift this deal to your Fave-ourite person!
+                </p>
               </div>
               <div className="p-4">
                 <Link to="/" className=" text-blue-400 text-lg font-normal underline">
@@ -234,7 +248,9 @@ export default function ProductDetails() {
               <h4 className="p-4 text-lg font-semibold text-black">How to redeem</h4>
               <div className="p-4 border-y-[1px] border-slate-200 flex items-center">
                 <img src={Mobile} alt="icon" className="w-[52px] mr-2" />
-                <p className="text-lg font-normal">You can easily redeem from your phone. No printout required.</p>
+                <p className="text-lg font-normal">
+                  You can easily redeem from your phone. No printout required.
+                </p>
               </div>
               <div className="p-4">
                 <Link to="/" className=" text-blue-400 text-lg font-normal underline">
@@ -245,7 +261,10 @@ export default function ProductDetails() {
             <div className="bg-white rounded shadow-md mb-5">
               <h4 className="p-4 text-lg font-semibold text-black">Cancellation Policy</h4>
               <div className="p-4 border-y-[1px] border-slate-200">
-                <p className="text-lg font-normal">Cancel using your Fave app within the next 3 days and receive a full refund in Fave cashback</p>
+                <p className="text-lg font-normal">
+                  Cancel using your Fave app within the next 3 days and receive a full refund in
+                  Fave cashback
+                </p>
               </div>
             </div>
             <div className="shadow-md">
@@ -260,15 +279,24 @@ export default function ProductDetails() {
         <div>
           <h3 className="text-2xl font-bold">Recomended Offers</h3>
           <div className="grid grid-cols-1 my-5 gap-5 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-            {product.slice(0, 4).map((item) => (
+            {products.slice(0, 4).map((item) => (
               <div key={item.idMeal}>
-                <Card cardImg={item.strMealThumb} cardTitle={item.strMeal} cardSubtitle={item.strTags} onClick={() => navigate(`/${item.idMeal}`)} />
+                <Card
+                  cardImg={item.strMealThumb}
+                  cardTitle={item.strMeal}
+                  cardSubtitle={item.strTags}
+                  onClick={() => dispatch(increment(item.idMeal))}
+                  cardTitleLink={`/${item.idMeal}`}
+                />
               </div>
             ))}
           </div>
           <div className="mt-8 mb-20 text-right">
-            <Link to="/allproducts" className="inline-block text-orange-400 text-xl font-bold tracking-wider">
-              View All
+            <Link
+              to="/allproducts"
+              className="inline-block py-2 px-5 bg-orange-600 border-2 border-orange-600 text-white text-lg font-semibold rounded-md hover:bg-transparent hover:text-orange-600 duration-300"
+            >
+              All Products
             </Link>
           </div>
         </div>

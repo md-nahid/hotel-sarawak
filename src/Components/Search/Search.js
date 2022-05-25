@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { hideSearch } from "../../Redux/Actions";
-import Card from "../Card/Card";
-import { useDispatch, useSelector } from "react-redux";
-import { Icon } from "@iconify/react";
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { hideSearch } from '../../Redux/Actions';
+import Card from '../Card/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { Icon } from '@iconify/react';
 
 export default function Search() {
   const dispatch = useDispatch();
-  let [value, setValue] = useState("");
+  let [value, setValue] = useState('');
   const { products } = useSelector((state) => state.cartCount);
   return (
-    <motion.div className="fixed top-0 left-0 w-full h-screen bg-yellow-400 pb-3 overflow-y-scroll z-50" animate={animate}>
+    <motion.div
+      className="fixed top-0 left-0 w-full h-screen bg-yellow-400 pb-3 overflow-y-scroll z-50"
+      animate={animate}
+    >
       <div className="w-full sticky top-0 z-50 bg-white py-3">
         <input
           type="text"
@@ -23,7 +26,7 @@ export default function Search() {
         <button
           className="absolute right-5 top-1/2 -translate-y-1/2 text-xl text-gray-500 hover:text-gray-900"
           onClick={() => {
-            setValue("");
+            setValue('');
             dispatch(hideSearch());
           }}
         >
@@ -34,7 +37,13 @@ export default function Search() {
         {products
           .filter((item) => item.strMeal.toLowerCase().includes(value))
           .map((prod) => (
-            <Card key={prod.idMeal} cardImg={prod.strMealThumb} cardTitle={prod.strMeal} cardSubtitle={prod.strTags} />
+            <Card
+              key={prod.idMeal}
+              cardImg={prod.strMealThumb}
+              cardTitle={prod.strMeal}
+              cardSubtitle={prod.strTags}
+              cardTitleLink={`/${prod.idMeal}`}
+            />
           ))}
       </div>
     </motion.div>
