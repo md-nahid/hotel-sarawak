@@ -25,7 +25,11 @@ export default function Card({
       </div>
       <div className="px-3 py-1 sm:py-4 text-slate-900">
         <h4 className="flex justify-between items-center">
-          <Link to={cardTitleLink} className="text-lg font-bold capitalize hover:underline">
+          <Link
+            to={cardTitleLink}
+            target="_blank"
+            className="text-lg font-bold capitalize hover:underline"
+          >
             {cardTitle}
           </Link>
           <p className="flex items-center font-lato font-bold text-orange-600">

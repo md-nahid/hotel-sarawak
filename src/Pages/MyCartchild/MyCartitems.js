@@ -75,7 +75,7 @@ export default function MyCartitems() {
           </div>
           <div className="mt-5">
             <Link
-              to="checkout"
+              to="/checkout"
               className="block w-full py-2 text-center bg-orange-600 text-[16px] font-semibold text-white border-2 border-orange-600 rounded-md hover:bg-transparent hover:text-orange-600 duration-300"
             >
               Checkout

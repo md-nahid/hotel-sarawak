@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { hideSearch } from '../../Redux/Actions';
+import increment, { hideSearch, addToFavorite } from '../../Redux/Actions';
 import Card from '../Card/Card';
 import { useDispatch, useSelector } from 'react-redux';
 import { Icon } from '@iconify/react';
@@ -43,6 +43,8 @@ export default function Search() {
               cardTitle={prod.strMeal}
               cardSubtitle={prod.strTags}
               cardTitleLink={`/${prod.idMeal}`}
+              onClick={() => dispatch(increment(prod.idMeal))}
+              addtoFavorite={() => dispatch(addToFavorite(prod.idMeal))}
             />
           ))}
       </div>

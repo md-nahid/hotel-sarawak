@@ -6,7 +6,6 @@ import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { removefromCart } from '../../Redux/Actions';
 import { showSearch } from '../../Redux/Actions';
-
 // icons
 import { Icon } from '@iconify/react';
 
