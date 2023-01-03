@@ -21,6 +21,7 @@ export default function Home() {
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+
   return (
     <div>
       <div className="max-w-screen-xl w-full px-0 sm:px-4 m-auto mt-11">

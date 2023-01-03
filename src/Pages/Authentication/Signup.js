@@ -1,32 +1,52 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import FormControl from "../../Components/FormControl/FormControl";
-import CustomSelect from "../../Components/Select/Select";
-import { countryOptions } from "../../Components/Alldata/Select.data";
-import Checkbox from "../../Components/Checkbox/Checkbox";
-// import images and icons
-// import { Icon } from "@iconify/react";
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import FormControl from '../../Components/FormControl/FormControl';
+import CustomSelect from '../../Components/Select/Select';
+import { countryOptions } from '../../Components/Alldata/Select.data';
+import Checkbox from '../../Components/Checkbox/Checkbox';
+import cn from 'classnames';
+// import icons
+import { Icon } from '@iconify/react';
 
 export default function Signup() {
+  const [disabled, setDisabled] = useState(true);
   const [formData, setFormData] = useState({
-    fullName: "",
-    mailNo: "",
-    streetAddress: "",
+    fullName: '',
+    pass: '',
+    viewPass: false,
+    mailNo: '',
+    streetAddress: '',
+    country: '',
     terms: false,
   });
+  useEffect(() => {
+    if (
+      formData.fullName !== '' &&
+      formData.mailNo !== '' &&
+      formData.pass !== '' &&
+      formData.streetAddress !== '' &&
+      formData.country !== '' &&
+      formData.terms
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [formData]);
+
   return (
-    <div>
+    <form onSubmit={(e) => e.preventDefault()}>
       <div className="max-w-xl w-full m-auto mt-20">
         <div className="text-center">
-          <h2 className="text-xl font-semibold font-meriweather my-3">Sign up is free</h2>
+          <h2 className="text-xl font-semibold font-meriweather my-3">Please, Fillout the Form</h2>
           <p>Already have an account</p>
           <p>
-            <Link to="signup" className="text-green-500 hover:text-red-500 duration-200">
+            <Link to="/auth" className="text-green-500 hover:text-red-500 duration-200">
               Login now
             </Link>
           </p>
         </div>
-        <div className="rounded-md bg-DarkOrange shadow-md px-2 py-5 sm:px-10 sm:py-10 text-white mt-5">
+        <div className="rounded-md bg-slate-300 shadow-md px-2 py-5 sm:px-10 sm:py-10 text-orange-600 mt-5">
           <div className="grid grid-cols-1 gap-5">
             <FormControl
               htmlFor="fullname"
@@ -35,6 +55,16 @@ export default function Signup() {
               placeholder="your full name ..."
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+            />
+            <FormControl
+              htmlFor="password"
+              label="Password"
+              type={formData.viewPass ? 'text' : 'password'}
+              placeholder="Password"
+              value={formData.pass}
+              icon={formData.viewPass ? <Icon icon="charm:eye-slash" /> : <Icon icon="charm:eye" />}
+              onClick={() => setFormData({ ...formData, viewPass: !formData.viewPass })}
+              onChange={(e) => setFormData({ ...formData, pass: e.target.value })}
             />
             <FormControl
               htmlFor="email"
@@ -46,7 +76,10 @@ export default function Signup() {
             />
             <div>
               <label className="font-semibold font-lato mb-1 block">Select Country</label>
-              <CustomSelect options={countryOptions} />
+              <CustomSelect
+                options={countryOptions}
+                onChange={(v) => setFormData({ ...formData, country: v.value })}
+              />
             </div>
             <FormControl
               htmlFor="streetaddress"
@@ -56,7 +89,7 @@ export default function Signup() {
               value={formData.streetAddress}
               onChange={(e) => setFormData({ ...formData, streetAddress: e.target.value })}
             />
-            <div>
+            <div className="font-semibold">
               <Checkbox
                 htmlFor="checkbox"
                 label="Aggree to our Terms and Conditions."
@@ -65,13 +98,20 @@ export default function Signup() {
               />
             </div>
             <div className="text-right mt-4">
-              <button className="py-2 w-full px-5 text-lg bg-white text-red-600 font-semibold rounded-md border-2 border-transparent hover:bg-transparent duration-300 hover:text-white hover:border-white">
+              <button
+                disabled={disabled}
+                type="submit"
+                className={cn(
+                  'py-3 border-0 w-full rounded-md font-bold transition-all duration-700',
+                  disabled ? 'bg-slate-200 cursor-not-allowed' : 'bg-DarkOrange text-white border-2'
+                )}
+              >
                 Submit
               </button>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
